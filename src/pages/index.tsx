@@ -39,21 +39,8 @@ export default function Home(): JSX.Element {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
       <Box sx={{ maxWidth: 300 }} mx='auto'>
-        <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
-          <TextInput
-            label='検索キーワード'
-            placeholder='キーワード'
-            {...form.getInputProps('keyword')}
-          />
-
-          <Group position='center' my='md'>
-            <Button type='submit' color='cyan'>
-              検索
-            </Button>
-          </Group>
-        </form>
+        <SearchForm setGourmet={setGourmet} setStatus={setStatus} />
       </Box>
       {gourmet && (
         <Grid>
