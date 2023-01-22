@@ -1,35 +1,12 @@
 import { useState } from 'react';
-import { Badge, Box, Button, Card, Group, Grid, TextInput, Image, Text } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { Badge, Card, Box, SimpleGrid, Image, Text, Loader, Anchor } from '@mantine/core';
 import Head from 'next/head';
-import { Results, Root } from '@/types';
+import { Results } from '@/types';
+import { SearchForm } from '@/components/SearchForm';
 
 export default function Home(): JSX.Element {
   const [gourmet, setGourmet] = useState<Results>();
-  const form = useForm({
-    initialValues: {
-      keyword: '',
-    },
-
-    validate: {
-      keyword: (value) => (value.length < 1 ? '入力してください' : null),
-    },
-  });
-
-  const onSubmit = (values: { keyword: string }) => {
-    const params = { keyword: values.keyword };
-    const query = new URLSearchParams(params);
-
-    const request = async () => {
-      const res = await fetch(`/api/search?${query}`);
-      const data: Root = await res.json();
-
-      setGourmet(data.results);
-    };
-
-    request();
-    values.keyword = '';
-  };
+  const [status, setStatus] = useState<boolean>(false);
 
   return (
     <>
@@ -42,29 +19,43 @@ export default function Home(): JSX.Element {
       <Box sx={{ maxWidth: 300 }} mx='auto'>
         <SearchForm setGourmet={setGourmet} setStatus={setStatus} />
       </Box>
-      {gourmet && (
-        <Grid>
+
+      {status && <Loader />}
+      {gourmet && !status && (
+        <SimpleGrid
+          breakpoints={[
+            { minWidth: 'sm', cols: 2 },
+            { minWidth: 'md', cols: 3 },
+            { minWidth: 1200, cols: 4 },
+          ]}
+        >
           {gourmet.shop.map((ctx) => (
-            <Grid.Col span={4} key={ctx.id}>
-              <Card shadow='sm' p='lg' radius='md' withBorder>
+            <Box key={ctx.id}>
+              <Card shadow='sm' p='lg' radius='md' withBorder style={{ height: 320 }}>
                 <Card.Section>
                   <Image src={ctx.photo.pc.l} height={160} alt='Norway' />
                 </Card.Section>
 
-                <Group position='apart' mt='md' mb='xs'>
-                  <Text weight={500}>{ctx.name}</Text>
-                  <Badge color='pink' variant='light'>
-                    {ctx.genre.name}
-                  </Badge>
-                </Group>
-                <Text size='sm' color='dimmed'>
-                  平均ディナー予算
+                <Text weight={500}>
+                  <Anchor href={ctx.urls.pc} target='_blank'>
+                    {ctx.name}
+                  </Anchor>
                 </Text>
-                <Text size='sm'>{ctx.budget.average ? ctx.budget.average : '記載なし'}</Text>
+                <Badge color='pink' variant='light'>
+                  {ctx.genre.name}
+                </Badge>
+                <Text size='sm'>住所</Text>
+                <Text size='xs' color='dimmed'>
+                  {ctx.address}
+                </Text>
+                <Text size='sm'>平均ディナー予算</Text>
+                <Text size='xs' color='dimmed'>
+                  {ctx.budget.average ? ctx.budget.average : '記載なし'}
+                </Text>
               </Card>
-            </Grid.Col>
+            </Box>
           ))}
-        </Grid>
+        </SimpleGrid>
       )}
     </>
   );
