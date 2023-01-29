@@ -131,3 +131,8 @@ export interface SubGenre {
 export interface Urls {
   pc: string;
 }
+
+export type AuthForm = {
+  email: string;
+  password: string;
+};
