@@ -1,10 +1,20 @@
 import { useState } from 'react';
-import { Badge, Card, Box, SimpleGrid, Image, Text, Loader, Anchor } from '@mantine/core';
+import {
+  Badge,
+  Card,
+  Box,
+  SimpleGrid,
+  Image,
+  Text,
+  Loader,
+  Anchor,
+} from '@mantine/core';
+import { CustomNextPage } from 'next';
 import Head from 'next/head';
 import { Results } from '@/types';
 import { SearchForm } from '@/components/SearchForm';
 
-export default function Home(): JSX.Element {
+const Home: CustomNextPage = () => {
   const [gourmet, setGourmet] = useState<Results>();
   const [status, setStatus] = useState<boolean>(false);
 
@@ -31,7 +41,13 @@ export default function Home(): JSX.Element {
         >
           {gourmet.shop.map((ctx) => (
             <Box key={ctx.id}>
-              <Card shadow='sm' p='lg' radius='md' withBorder style={{ height: 320 }}>
+              <Card
+                shadow='sm'
+                p='lg'
+                radius='md'
+                withBorder
+                style={{ height: 320 }}
+              >
                 <Card.Section>
                   <Image src={ctx.photo.pc.l} height={160} alt='Norway' />
                 </Card.Section>
@@ -59,4 +75,6 @@ export default function Home(): JSX.Element {
       )}
     </>
   );
-}
+};
+
+export default Home;
