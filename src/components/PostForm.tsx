@@ -78,7 +78,13 @@ export const PostFormMemo: FC = () => {
           value={editedPost.address}
           onChange={(e) => update({ ...editedPost, address: e.target.value })}
         />
-        <MultiSelect mt='md' data={data} label='営業日' placeholder='営業日' />
+        <MultiSelect
+          mt='md'
+          onChange={(e) => update({ ...editedPost, business_day: e })}
+          data={data}
+          label='営業日'
+          placeholder='営業日'
+        />
         <Space m='md' />
         <Button
           m='auto'
