@@ -76,7 +76,7 @@ export const PostFormMemo: FC = () => {
           label='住所'
           placeholder='住所'
           value={editedPost.address}
-          onChange={(e) => update({ ...editedPost, title: e.target.value })}
+          onChange={(e) => update({ ...editedPost, address: e.target.value })}
         />
         <MultiSelect mt='md' data={data} label='営業日' placeholder='営業日' />
         <Space m='md' />
