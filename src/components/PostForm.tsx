@@ -35,6 +35,8 @@ export const PostFormMemo: FC = () => {
         user_id: session?.user?.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
+        address: editedPost.address,
+        business_day: editedPost.business_day,
       });
       setFullUrl('');
     } else {
@@ -42,6 +44,8 @@ export const PostFormMemo: FC = () => {
         id: editedPost.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
+        address: editedPost.address,
+        business_day: editedPost.business_day,
       });
       setFullUrl('');
     }

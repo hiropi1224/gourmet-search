@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { LogoutIcon } from '@heroicons/react/outline';
+import { SimpleGrid } from '@mantine/core';
 import { useQueryPosts } from '@/hooks/useQueryPosts';
 import { supabase } from '@/utils/supabase';
 import { PostItem } from '@/components/PostItem';
@@ -17,7 +18,13 @@ export const PostList: FC = () => {
         className='my-6 h-6 w-6 cursor-pointer text-blue-500'
         onClick={signOut}
       />
-      <ul data-testid='ul-post' className='my-5'>
+      <SimpleGrid
+        breakpoints={[
+          { minWidth: 'sm', cols: 2 },
+          { minWidth: 'md', cols: 3 },
+          { minWidth: 1200, cols: 4 },
+        ]}
+      >
         {posts?.map((post) => (
           <PostItem
             key={post.id}
@@ -25,9 +32,11 @@ export const PostList: FC = () => {
             title={post.title}
             post_url={post.post_url}
             user_id={post.user_id}
+            address={post.address}
+            business_day={post.business_day}
           />
         ))}
-      </ul>
+      </SimpleGrid>
     </div>
   );
 };
