@@ -64,11 +64,12 @@ export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
         <Text size='sm'>{`住所: ${address}`}</Text>
         <Group>
           <Text size='sm'>営業日</Text>
-          {business_day.map((day, i) => (
-            <Text key={i} size='sm'>
-              {`${day}曜`}
-            </Text>
-          ))}
+          {business_day.length !== 0 &&
+            business_day.map((day, i) => (
+              <Text key={i} size='sm'>
+                {`${day}曜`}
+              </Text>
+            ))}
         </Group>
         {session?.user?.id === user_id && (
           <div className='flex pr-4'>

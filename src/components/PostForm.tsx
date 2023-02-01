@@ -10,8 +10,10 @@ import {
   Center,
   Text,
   Group,
+  MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
+import router from 'next/router';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -50,9 +52,17 @@ export const PostFormMemo: FC = () => {
       setFullUrl('');
     }
   };
+  const data = [
+    { value: '月', label: '月' },
+    { value: '火', label: '火' },
+    { value: '水', label: '水' },
+    { value: '木', label: '木' },
+    { value: '金', label: '金' },
+  ];
 
   return (
     <Box sx={{ maxWidth: 300 }} mx='auto'>
+      <Button onClick={() => router.push('/search')}>投稿一覧</Button>
       <form onSubmit={submitHandler}>
         <TextInput
           mt='md'
@@ -61,6 +71,14 @@ export const PostFormMemo: FC = () => {
           value={editedPost.title}
           onChange={(e) => update({ ...editedPost, title: e.target.value })}
         />
+        <TextInput
+          mt='md'
+          label='住所'
+          placeholder='住所'
+          value={editedPost.address}
+          onChange={(e) => update({ ...editedPost, title: e.target.value })}
+        />
+        <MultiSelect mt='md' data={data} label='営業日' placeholder='営業日' />
         <Space m='md' />
         <Button
           m='auto'
@@ -68,7 +86,11 @@ export const PostFormMemo: FC = () => {
           type='submit'
           style={{ display: 'flex' }}
           loading={useMutateUploadPostImg.isLoading}
-          disabled={useMutateUploadPostImg.isLoading || !editedPost.title}
+          disabled={
+            useMutateUploadPostImg.isLoading ||
+            !editedPost.title ||
+            !editedPost.address
+          }
         >
           {editedPost.id ? 'Update' : 'Create'}
         </Button>
