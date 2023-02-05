@@ -18,6 +18,7 @@ const useStore = create<State>((set) => ({
     post_url: '',
     address: '',
     business_day: [''],
+    latlng: { lat: '', lng: '' },
   },
   updateEditedPost: (payload) =>
     set({
@@ -27,6 +28,7 @@ const useStore = create<State>((set) => ({
         post_url: payload.post_url,
         address: payload.address,
         business_day: payload.business_day,
+        latlng: { lat: payload.latlng.lat, lng: payload.latlng.lng },
       },
     }),
   resetEditedPost: () =>
@@ -37,6 +39,7 @@ const useStore = create<State>((set) => ({
         post_url: '',
         address: '',
         business_day: [''],
+        latlng: { lat: '', lng: '' },
       },
     }),
 }));

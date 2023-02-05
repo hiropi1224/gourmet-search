@@ -1,4 +1,4 @@
-import { FormEvent, FC, memo } from 'react';
+import { FormEvent, FC, memo, useMemo, useState, useEffect } from 'react';
 import { CameraIcon } from '@heroicons/react/solid';
 import {
   TextInput,
@@ -13,6 +13,7 @@ import {
   MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
+import dynamic from 'next/dynamic';
 import router from 'next/router';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
@@ -29,6 +30,10 @@ export const PostFormMemo: FC = () => {
     editedPost.post_url,
     'posts'
   );
+  const [position, setPosition] = useState({
+    lat: 35.672909594409305,
+    lng: 139.71265654633325,
+  });
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,6 +44,7 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         address: editedPost.address,
         business_day: editedPost.business_day,
+        latlng: { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng },
       });
       setFullUrl('');
     } else {
@@ -48,6 +54,7 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         address: editedPost.address,
         business_day: editedPost.business_day,
+        latlng: { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng },
       });
       setFullUrl('');
     }
@@ -59,6 +66,34 @@ export const PostFormMemo: FC = () => {
     { value: '木', label: '木' },
     { value: '金', label: '金' },
   ];
+  const MapWithNoSSR = useMemo(
+    () =>
+      dynamic(() => import('@/components/PostMap'), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false,
+      }),
+    []
+  );
+
+  const Marker = useMemo(
+    () =>
+      dynamic(() => import('@/components/CustomMarker'), {
+        loading: () => <>...loading</>,
+        ssr: false,
+      }),
+    []
+  );
+
+  useEffect(() => {
+    if (
+      Number(editedPost.latlng.lat) !== position.lat &&
+      Number(editedPost.latlng.lng) !== position.lng
+    )
+      update({
+        ...editedPost,
+        latlng: { lat: position.lat.toString(), lng: position.lng.toString() },
+      });
+  }, [editedPost.latlng]);
 
   return (
     <Box sx={{ maxWidth: 300 }} mx='auto'>
@@ -77,6 +112,10 @@ export const PostFormMemo: FC = () => {
           placeholder='住所'
           value={editedPost.address}
           onChange={(e) => update({ ...editedPost, address: e.target.value })}
+        />
+        <Space m='md' />
+        <MapWithNoSSR
+          Marker={<Marker position={position} setPosition={setPosition} />}
         />
         <MultiSelect
           mt='md'

@@ -24,6 +24,7 @@ export const PostList: FC = () => {
             user_id={post.user_id}
             address={post.address}
             business_day={post.business_day}
+            latlng={post.latlng}
           />
         ))}
       </SimpleGrid>

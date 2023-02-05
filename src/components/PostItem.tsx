@@ -19,6 +19,7 @@ export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
   user_id,
   address,
   business_day,
+  latlng,
 }) => {
   const session = useStore((state) => state.session);
   const update = useStore((state) => state.updateEditedPost);
@@ -83,6 +84,7 @@ export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
                   post_url: post_url,
                   address: address,
                   business_day: business_day,
+                  latlng: { lat: latlng.lat, lng: latlng.lng },
                 });
               }}
             />
