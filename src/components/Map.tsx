@@ -16,7 +16,7 @@ type Props = {
 };
 
 const Map: FC<Props> = ({ Marker }) => {
-  const wid = window.innerWidth / 2;
+  const wid = window.innerWidth / 2 > 300 ? window.innerWidth / 2 : 300;
 
   return (
     <MapContainer
