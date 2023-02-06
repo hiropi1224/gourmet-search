@@ -100,8 +100,10 @@ export const PostFormMemo: FC = () => {
       });
   }, [editedPost.latlng]);
 
+  const width = (window.innerWidth * 2) / 3;
+
   return (
-    <Box sx={{ maxWidth: 800 }} mx='auto'>
+    <Box sx={{ maxWidth: 800, width: width }} mx='auto'>
       <Button onClick={() => router.push('/search')}>投稿一覧</Button>
       <form onSubmit={submitHandler}>
         <TextInput
