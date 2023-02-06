@@ -1,12 +1,6 @@
-import { FC, useCallback, useState } from 'react';
-import L, { LeafletMouseEvent } from 'leaflet';
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMapEvent,
-} from 'react-leaflet';
+import { FC } from 'react';
+import L from 'leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 L.Icon.Default.imagePath =
@@ -17,22 +11,11 @@ const initPosition = {
   lng: 139.71265654633325,
 };
 
-function LocationMarker() {
-  const [position, setPosition] = useState(initPosition);
+type Props = {
+  Marker: JSX.Element;
+};
 
-  const onClick: (event: LeafletMouseEvent) => void = useCallback((e) => {
-    setPosition({ lat: e.latlng.lat, lng: e.latlng.lng });
-  }, []);
-  useMapEvent('click', onClick);
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>{`You are here lat:${position.lat} lng:${position.lng}`}</Popup>
-    </Marker>
-  );
-}
-
-const Map: FC = () => {
+const Map: FC<Props> = ({ Marker }) => {
   const wid = window.innerWidth / 2;
 
   return (
@@ -46,7 +29,7 @@ const Map: FC = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <LocationMarker />
+      {Marker}
     </MapContainer>
   );
 };
