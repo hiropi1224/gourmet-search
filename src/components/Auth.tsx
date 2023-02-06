@@ -66,7 +66,7 @@ export const Auth: FC = () => {
           id='password'
           placeholder='password'
           label='Password*'
-          description='Must be min 5 char'
+          description='Must be min 6 char'
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
