@@ -1,9 +1,18 @@
-import React, { FC } from 'react';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 import { SimpleGrid } from '@mantine/core';
 import { useQueryPosts } from '@/hooks/useQueryPosts';
 import { PostItem } from '@/components/PostItem';
 
-export const PostList: FC = () => {
+type Props = {
+  setPosition: Dispatch<
+    SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+};
+
+export const PostList: FC<Props> = ({ setPosition }) => {
   const { data: posts } = useQueryPosts();
 
   return (
@@ -16,16 +25,7 @@ export const PostList: FC = () => {
         ]}
       >
         {posts?.map((post) => (
-          <PostItem
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            post_url={post.post_url}
-            user_id={post.user_id}
-            address={post.address}
-            business_day={post.business_day}
-            latlng={post.latlng}
-          />
+          <PostItem key={post.id} postItem={post} setPosition={setPosition} />
         ))}
       </SimpleGrid>
     </div>

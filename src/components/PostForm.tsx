@@ -44,7 +44,9 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         address: editedPost.address,
         business_day: editedPost.business_day,
-        latlng: { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng },
+        latlng: editedPost.latlng
+          ? { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng }
+          : null,
       });
       setFullUrl('');
     } else {
@@ -54,7 +56,9 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         address: editedPost.address,
         business_day: editedPost.business_day,
-        latlng: { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng },
+        latlng: editedPost.latlng
+          ? { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng }
+          : null,
       });
       setFullUrl('');
     }
@@ -85,6 +89,7 @@ export const PostFormMemo: FC = () => {
   );
 
   useEffect(() => {
+    if (editedPost.latlng == null) return;
     if (
       Number(editedPost.latlng.lat) !== position.lat &&
       Number(editedPost.latlng.lng) !== position.lng

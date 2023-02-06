@@ -145,7 +145,7 @@ export type Post = {
   post_url: string;
   address: string;
   business_day: string[];
-  latlng: { lat: string; lng: string };
+  latlng: { lat: string; lng: string } | null;
 };
 export type EditedPost = {
   id: string;
@@ -153,5 +153,5 @@ export type EditedPost = {
   post_url: string;
   address: string;
   business_day: string[];
-  latlng: { lat: string; lng: string };
+  latlng: { lat: string; lng: string } | null;
 };

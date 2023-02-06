@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { Dispatch, FC, memo, SetStateAction } from 'react';
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid';
 import {
   Image as MantineImage,
@@ -12,15 +12,20 @@ import { useMutatePost } from '../hooks/useMutatePost';
 import useStore from '../store';
 import { Post } from '../types';
 
-export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
-  id,
-  title,
-  post_url,
-  user_id,
-  address,
-  business_day,
-  latlng,
-}) => {
+type PostItem = Omit<Post, 'created_at'>;
+type Props = {
+  postItem: PostItem;
+  setPosition: Dispatch<
+    SetStateAction<{
+      lat: number;
+      lng: number;
+    }>
+  >;
+};
+
+export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
+  const { id, title, post_url, user_id, address, business_day, latlng } =
+    postItem;
   const session = useStore((state) => state.session);
   const update = useStore((state) => state.updateEditedPost);
   const { deletePostMutation } = useMutatePost();
@@ -55,9 +60,14 @@ export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
     }
   };
 
+  const onClick = () => {
+    if (latlng === null) return;
+    setPosition({ lat: Number(latlng?.lat), lng: Number(latlng?.lng) });
+  };
+
   return (
     <>
-      <Card shadow='sm' p='lg' radius='md' withBorder>
+      <Card shadow='sm' p='lg' radius='md' withBorder onClick={onClick}>
         <Card.Section>{imgArea()}</Card.Section>
         <Text size='xl' weight={500}>
           {title}
@@ -84,7 +94,7 @@ export const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({
                   post_url: post_url,
                   address: address,
                   business_day: business_day,
-                  latlng: { lat: latlng.lat, lng: latlng.lng },
+                  latlng: latlng ? { lat: latlng.lat, lng: latlng.lng } : null,
                 });
               }}
             />
