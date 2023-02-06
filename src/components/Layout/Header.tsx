@@ -148,15 +148,24 @@ export const CustomHeader: FC = () => {
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
 
-          <a href='#' className={classes.link}>
-            Home
-          </a>
-          <a href='#' className={classes.link}>
-            Learn
-          </a>
-          <a href='#' className={classes.link}>
-            Academy
-          </a>
+          <Button variant='subtle' radius='xs' onClick={() => onClick('/')}>
+            検索
+          </Button>
+
+          <Button
+            variant='subtle'
+            radius='xs'
+            onClick={() => onClick('/search')}
+          >
+            投稿一覧
+          </Button>
+          <Button
+            variant='subtle'
+            radius='xs'
+            onClick={() => onClick('/search/post')}
+          >
+            投稿フォーム
+          </Button>
 
           <Divider
             my='sm'
@@ -164,8 +173,7 @@ export const CustomHeader: FC = () => {
           />
 
           <Group position='center' grow pb='xl' px='md'>
-            <Button variant='default'>Log in</Button>
-            <Button>Sign up</Button>
+            <Button onClick={() => supabase.auth.signOut()}>ログアウト</Button>
           </Group>
         </ScrollArea>
       </Drawer>
