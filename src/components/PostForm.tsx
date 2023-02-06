@@ -101,7 +101,7 @@ export const PostFormMemo: FC = () => {
   }, [editedPost.latlng]);
 
   return (
-    <Box sx={{ maxWidth: 300 }} mx='auto'>
+    <Box sx={{ maxWidth: 800 }} mx='auto'>
       <Button onClick={() => router.push('/search')}>投稿一覧</Button>
       <form onSubmit={submitHandler}>
         <TextInput

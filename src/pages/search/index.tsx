@@ -4,6 +4,7 @@ import { CustomNextPage } from 'next';
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 import { Auth } from '@/components/Auth';
+import { Layout } from '@/components/Layout/Layout';
 import { PostView } from '@/components/PostView';
 
 const Search: CustomNextPage = () => {
@@ -17,7 +18,7 @@ const Search: CustomNextPage = () => {
     });
   }, [setSession]);
 
-  return <>{!session ? <Auth /> : <PostView />}</>;
+  return <Layout>{!session ? <Auth /> : <PostView />}</Layout>;
 };
 
 export default Search;

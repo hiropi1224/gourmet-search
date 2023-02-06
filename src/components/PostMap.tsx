@@ -21,7 +21,7 @@ const Map: FC<Props> = ({ Marker }) => {
       center={initPosition}
       zoom={18}
       scrollWheelZoom={true}
-      style={{ height: '400px', width: '400px', margin: 'auto' }}
+      style={{ height: '400px', width: '800px', margin: 'auto' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
