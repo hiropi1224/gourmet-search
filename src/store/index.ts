@@ -16,7 +16,6 @@ const useStore = create<State>((set) => ({
     id: '',
     title: '',
     post_url: '',
-    address: '',
     business_day: [''],
     latlng: { lat: '', lng: '' },
   },
@@ -26,7 +25,6 @@ const useStore = create<State>((set) => ({
         id: payload.id,
         title: payload.title,
         post_url: payload.post_url,
-        address: payload.address,
         business_day: payload.business_day,
         latlng: payload.latlng
           ? { lat: payload.latlng.lat, lng: payload.latlng.lng }
@@ -39,7 +37,6 @@ const useStore = create<State>((set) => ({
         id: '',
         title: '',
         post_url: '',
-        address: '',
         business_day: [''],
         latlng: { lat: '', lng: '' },
       },

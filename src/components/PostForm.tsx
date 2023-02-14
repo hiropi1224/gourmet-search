@@ -42,7 +42,6 @@ export const PostFormMemo: FC = () => {
         user_id: session?.user?.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
-        address: editedPost.address,
         business_day: editedPost.business_day,
         latlng: editedPost.latlng
           ? { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng }
@@ -54,7 +53,6 @@ export const PostFormMemo: FC = () => {
         id: editedPost.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
-        address: editedPost.address,
         business_day: editedPost.business_day,
         latlng: editedPost.latlng
           ? { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng }
@@ -113,13 +111,6 @@ export const PostFormMemo: FC = () => {
           value={editedPost.title}
           onChange={(e) => update({ ...editedPost, title: e.target.value })}
         />
-        <TextInput
-          mt='md'
-          label='住所'
-          placeholder='住所'
-          value={editedPost.address}
-          onChange={(e) => update({ ...editedPost, address: e.target.value })}
-        />
         <Space m='md' />
         <MapWithNoSSR
           Marker={<Marker position={position} setPosition={setPosition} />}
@@ -138,11 +129,7 @@ export const PostFormMemo: FC = () => {
           type='submit'
           style={{ display: 'flex' }}
           loading={useMutateUploadPostImg.isLoading}
-          disabled={
-            useMutateUploadPostImg.isLoading ||
-            !editedPost.title ||
-            !editedPost.address
-          }
+          disabled={useMutateUploadPostImg.isLoading || !editedPost.title}
         >
           {editedPost.id ? 'Update' : 'Create'}
         </Button>

@@ -24,8 +24,7 @@ type Props = {
 };
 
 export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
-  const { id, title, post_url, user_id, address, business_day, latlng } =
-    postItem;
+  const { id, title, post_url, user_id, business_day, latlng } = postItem;
   const session = useStore((state) => state.session);
   const update = useStore((state) => state.updateEditedPost);
   const { deletePostMutation } = useMutatePost();
@@ -72,7 +71,6 @@ export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
         <Text size='xl' weight={500}>
           {title}
         </Text>
-        <Text size='sm'>{`住所: ${address}`}</Text>
         <Group>
           <Text size='sm'>営業日</Text>
           {business_day.length !== 0 &&
@@ -92,7 +90,6 @@ export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
                   id: id,
                   title: title,
                   post_url: post_url,
-                  address: address,
                   business_day: business_day,
                   latlng: latlng ? { lat: latlng.lat, lng: latlng.lng } : null,
                 });

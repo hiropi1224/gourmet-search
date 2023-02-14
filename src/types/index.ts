@@ -143,7 +143,6 @@ export type Post = {
   user_id: string | undefined;
   title: string;
   post_url: string;
-  address: string;
   business_day: string[];
   latlng: { lat: string; lng: string } | null;
 };
@@ -151,7 +150,6 @@ export type EditedPost = {
   id: string;
   title: string;
   post_url: string;
-  address: string;
   business_day: string[];
   latlng: { lat: string; lng: string } | null;
 };
