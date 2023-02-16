@@ -21,9 +21,14 @@ type Props = {
       lng: number;
     }>
   >;
+  setItem: Dispatch<
+    SetStateAction<{
+      title: string;
+    }>
+  >;
 };
 
-export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
+export const PostItemMemo: FC<Props> = ({ postItem, setPosition, setItem }) => {
   const { id, title, post_url, user_id, business_day, latlng } = postItem;
   const session = useStore((state) => state.session);
   const update = useStore((state) => state.updateEditedPost);
@@ -62,6 +67,7 @@ export const PostItemMemo: FC<Props> = ({ postItem, setPosition }) => {
   const onClick = () => {
     if (latlng === null) return;
     setPosition({ lat: Number(latlng?.lat), lng: Number(latlng?.lng) });
+    setItem({ title: title });
   };
 
   return (

@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
+import { Text } from '@mantine/core';
 import { LeafletMouseEvent } from 'leaflet';
 
 import { Marker, Popup, useMap, useMapEvent } from 'react-leaflet';
@@ -20,9 +21,10 @@ type Props = {
       lng: number;
     }>
   >;
+  title: string;
 };
 
-const CustomMarker: FC<Props> = ({ position, setPosition }) => {
+const CustomMarker: FC<Props> = ({ position, setPosition, title }) => {
   const map = useMap();
   const onClick: (event: LeafletMouseEvent) => void = useCallback((e) => {
     setPosition({ lat: e.latlng.lat, lng: e.latlng.lng });
@@ -40,7 +42,11 @@ const CustomMarker: FC<Props> = ({ position, setPosition }) => {
     <></>
   ) : (
     <Marker position={position}>
-      <Popup>{`You are here lat:${position.lat} lng:${position.lng}`}</Popup>
+      <Popup>
+        <Text>{title}</Text>
+        <Text>{`lat:${position.lat}`}</Text>
+        <Text>{`lng:${position.lng}`}</Text>
+      </Popup>
     </Marker>
   );
 };

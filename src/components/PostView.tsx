@@ -8,6 +8,9 @@ export const PostView: FC = () => {
     lat: 35.672909594409305,
     lng: 139.71265654633325,
   });
+  const [item, setItem] = useState({
+    title: '',
+  });
   const MapWithNoSSR = useMemo(
     () =>
       dynamic(() => import('@/components/Map'), {
@@ -28,10 +31,16 @@ export const PostView: FC = () => {
   return (
     <>
       <MapWithNoSSR
-        Marker={<Marker position={position} setPosition={setPosition} />}
+        Marker={
+          <Marker
+            position={position}
+            setPosition={setPosition}
+            title={item.title}
+          />
+        }
       />
       <Space h='md' />
-      <PostList setPosition={setPosition} />
+      <PostList setPosition={setPosition} setItem={setItem} />
     </>
   );
 };

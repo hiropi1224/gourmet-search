@@ -10,9 +10,14 @@ type Props = {
       lng: number;
     }>
   >;
+  setItem: Dispatch<
+    SetStateAction<{
+      title: string;
+    }>
+  >;
 };
 
-export const PostList: FC<Props> = ({ setPosition }) => {
+export const PostList: FC<Props> = ({ setPosition, setItem }) => {
   const { data: posts } = useQueryPosts();
 
   return (
@@ -25,7 +30,12 @@ export const PostList: FC<Props> = ({ setPosition }) => {
         ]}
       >
         {posts?.map((post) => (
-          <PostItem key={post.id} postItem={post} setPosition={setPosition} />
+          <PostItem
+            key={post.id}
+            postItem={post}
+            setPosition={setPosition}
+            setItem={setItem}
+          />
         ))}
       </SimpleGrid>
     </div>
