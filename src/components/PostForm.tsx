@@ -14,7 +14,6 @@ import {
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
 import dynamic from 'next/dynamic';
-import router from 'next/router';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -102,7 +101,6 @@ export const PostFormMemo: FC = () => {
 
   return (
     <Box sx={{ maxWidth: 800, minWidth: 300, width: width }} mx='auto'>
-      <Button onClick={() => router.push('/search')}>投稿一覧</Button>
       <form onSubmit={submitHandler}>
         <TextInput
           mt='md'

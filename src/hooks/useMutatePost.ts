@@ -1,4 +1,6 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import router from 'next/router';
+import { notification } from '@/utils/notification';
 import useStore from '../store';
 import { Post, EditedPost } from '../types';
 import { supabase } from '../utils/supabase';
@@ -24,7 +26,9 @@ export const useMutatePost: () => {
     },
     {
       onSuccess: () => {
+        router.push('/search');
         reset();
+        notification();
       },
       onError: (err: any) => {
         alert(err.message);
