@@ -21,7 +21,7 @@ type Props = {
       lng: number;
     }>
   >;
-  title: string;
+  title?: string;
 };
 
 const CustomMarker: FC<Props> = ({ position, setPosition, title }) => {
