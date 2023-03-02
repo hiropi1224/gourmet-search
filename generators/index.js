@@ -4,13 +4,13 @@ module.exports = (plop) => {
     prompts: [
       {
         type: 'list',
-        name: 'atomic',
-        message: 'Choose atomic?',
+        name: 'features',
+        message: 'Choose features?',
         choices: [
-          { name: 'atoms', value: 'atoms' },
-          { name: 'molecules', value: 'molecules' },
-          { name: 'organisms', value: 'organisms' },
-          { name: 'pages', value: 'pages' },
+          { name: 'common', value: 'Common' },
+          { name: 'search', value: 'Search' },
+          { name: 'postList', value: 'PostList' },
+          { name: 'postForm', value: 'PostForm' },
         ],
       },
       {
@@ -25,7 +25,7 @@ module.exports = (plop) => {
       },
     ],
     actions: (data) => {
-      const path = `../src/components/${data.atomic}/`;
+      const path = `../src/components/features/${data.features}/`;
       const actions = [
         {
           type: 'add',
