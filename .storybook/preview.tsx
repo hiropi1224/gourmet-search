@@ -5,6 +5,7 @@ import { useDarkMode } from 'storybook-dark-mode';
 import React from 'react';
 // import theme object you've exported in previous step
 import { theme } from './theme';
+import '../src/styles/globals.css';
 
 // Create a wrapper component that will contain all your providers.
 // Usually you should render all providers in this component:
