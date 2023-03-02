@@ -8,4 +8,9 @@ export default {
   component: {{properCase name}},
 } as ComponentMeta<typeof {{properCase name}}>;
 
-export const Primary: ComponentStory<typeof {{properCase name}}> = () => <{{properCase name}}>{{properCase name}}</{{properCase name}}>;
+const Template: ComponentStory<typeof {{properCase name}}> = (args) => (
+  <{{properCase name}} {...args}>{{properCase name}}</{{properCase name}}>
+);
+
+export const Primary = Template.bind({});
+Primary.args = {};
