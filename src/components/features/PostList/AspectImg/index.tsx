@@ -1,0 +1,1 @@
+export { AspectImg } from './AspectImg';
