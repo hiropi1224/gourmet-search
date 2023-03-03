@@ -13,6 +13,7 @@ type State = {
     lat: number;
     lng: number;
   };
+  initializePosition: () => void;
   setRestaurantInfo: (payload: { title: string }) => void;
   restaurantInfo: {
     title: string;
@@ -56,6 +57,13 @@ const useStore = create<State>((set) => ({
       position: {
         lat: payload.lat,
         lng: payload.lng,
+      },
+    }),
+  initializePosition: () =>
+    set({
+      position: {
+        lat: 35.672909594409305,
+        lng: 139.71265654633325,
       },
     }),
 
