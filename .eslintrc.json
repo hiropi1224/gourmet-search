@@ -7,7 +7,7 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "eslint-plugin-storybook",
+    "plugin:storybook/recommended",
     "prettier"
   ],
   "parserOptions": {
@@ -16,7 +16,13 @@
     "project": ["./tsconfig.json"],
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "jsx-a11y", "react", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "unused-imports"
+  ],
   "rules": {
     "padding-line-between-statements": [
       "error",
@@ -26,20 +32,23 @@
         "next": "return"
       }
     ],
-    "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": ["error"],
-    "@typescript-eslint/no-misused-promises": [
+    "@typescript-eslint/no-misused-promises":  [
       "error",
       {
         "checksVoidReturn": false
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
       }
     ],
     "@typescript-eslint/strict-boolean-expressions": [
@@ -63,10 +72,24 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "object", "index"],
+        "groups": [
+          "builtin", // 組み込みモジュール
+          "external", // npmでインストールした外部ライブラリ
+          "internal", // 自作モジュール
+          "parent",
+          "sibling",
+          "object",
+          "index"
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc", // 昇順にソート
+          "caseInsensitive": true // 小文字大文字を区別する
+        },
         "pathGroups": [
+          // 指定した順番にソートされる
           {
-            "pattern": "{react,react-dom/**}",
+            "pattern": "{react,next,next/*}",
             "group": "builtin",
             "position": "before"
           },
@@ -74,32 +97,32 @@
             "pattern": "{[A-Z]*,**/[A-Z]*}",
             "group": "internal",
             "position": "after"
-          },
-          {
-            "pattern": "./**.module.css",
-            "group": "index",
-            "position": "after"
           }
-        ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "alphabetize": {
-          "order": "asc"
-        }
+        ]
       }
     ],
     "react/display-name": "off",
     "no-console": [
-      2,
+      "error",
       {
         "allow": ["warn", "error"]
       }
-    ]
+    ],
+    "eqeqeq": "error",
+    "prefer-template": "error"
   },
   "overrides": [
     {
       "files": ["*.tsx"],
       "rules": {
         "react/prop-types": "off"
+      }
+    },
+    {
+      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+      "rules": {
+        "storybook/hierarchy-separator": "error",
+        "storybook/default-exports": "off"
       }
     }
   ],
