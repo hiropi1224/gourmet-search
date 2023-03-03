@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { CustomNextPage } from 'next';
+import React, { useEffect } from 'react';
 
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';

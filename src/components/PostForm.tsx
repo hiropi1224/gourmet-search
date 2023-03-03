@@ -1,4 +1,5 @@
-import { FormEvent, FC, memo, useMemo, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { FormEvent, FC, memo, useMemo, useEffect } from 'react';
 import { CameraIcon } from '@heroicons/react/solid';
 import {
   TextInput,
@@ -13,7 +14,6 @@ import {
   MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import dynamic from 'next/dynamic';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -23,16 +23,13 @@ export const PostFormMemo: FC = () => {
   const session = useStore((state) => state.session);
   const editedPost = useStore((state) => state.editedPost);
   const update = useStore((state) => state.updateEditedPost);
+  const position = useStore((state) => state.position);
   const { createPostMutation, updatePostMutation } = useMutatePost();
   const { useMutateUploadPostImg } = useUploadPostImg();
   const { fullUrl: postUrl, setFullUrl } = useDownloadUrl(
     editedPost.post_url,
     'posts'
   );
-  const [position, setPosition] = useState({
-    lat: 35.672909594409305,
-    lng: 139.71265654633325,
-  });
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,6 +83,7 @@ export const PostFormMemo: FC = () => {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line eqeqeq
     if (editedPost.latlng == null) return;
     if (
       Number(editedPost.latlng.lat) !== position.lat &&
@@ -110,9 +108,7 @@ export const PostFormMemo: FC = () => {
           onChange={(e) => update({ ...editedPost, title: e.target.value })}
         />
         <Space m='md' />
-        <MapWithNoSSR
-          Marker={<Marker position={position} setPosition={setPosition} />}
-        />
+        <MapWithNoSSR Marker={<Marker />} />
         <MultiSelect
           mt='md'
           onChange={(e) => update({ ...editedPost, business_day: e })}

@@ -1,11 +1,11 @@
-import { AspectRatio, Image } from '@mantine/core';
 import React, { FC } from 'react';
+import { AspectRatio, Image } from '@mantine/core';
 
 type Props = {
   imgUrl?: string;
 };
 
-export const AspectImg: FC<Props> = ({ imgUrl }) => {
+export const AspectImg: FC<Props> = ({ imgUrl = '' }) => {
   if (imgUrl) {
     return (
       <AspectRatio

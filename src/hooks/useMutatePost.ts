@@ -1,5 +1,5 @@
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import router from 'next/router';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { notification } from '@/utils/notification';
 import useStore from '../store';
 import { Post, EditedPost } from '../types';

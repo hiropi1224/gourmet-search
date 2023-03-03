@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline';
+import { Text } from '@mantine/core';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { PostItem } from './PostItem';
-import { Text } from '@mantine/core';
-import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline';
-import { title } from 'process';
 
 export default {
   title: 'Post/PostItem',

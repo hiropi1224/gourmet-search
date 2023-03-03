@@ -1,6 +1,6 @@
+import React, { FC } from 'react';
 import { Button } from '@mantine/core';
-import React from 'react';
 
-export const MantineButton = () => {
+export const MantineButton: FC = () => {
   return <Button>MantineButton</Button>;
 };

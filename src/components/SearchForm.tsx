@@ -23,7 +23,11 @@ export const SearchForm: FC<Props> = (props): JSX.Element => {
     },
   });
 
-  const onSubmit = async (values: { keyword: string; isLunch: boolean; order: string }) => {
+  const onSubmit = async (values: {
+    keyword: string;
+    isLunch: boolean;
+    order: string;
+  }) => {
     const params = {
       keyword: values.keyword,
       lunch: values.isLunch ? '1' : '0',

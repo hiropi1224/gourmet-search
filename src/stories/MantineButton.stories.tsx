@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 import { MantineButton } from './MantineButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

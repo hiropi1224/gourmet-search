@@ -1,12 +1,7 @@
-import { Dispatch, FC, memo, SetStateAction } from 'react';
+import { FC, memo } from 'react';
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid';
-import {
-  Image as MantineImage,
-  Card,
-  Text,
-  AspectRatio,
-  Group,
-} from '@mantine/core';
+import { Card, Text, Group } from '@mantine/core';
+import { AspectImg } from '@/components/features/PostList/AspectImg';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import useStore from '../store';
@@ -15,65 +10,30 @@ import { Post } from '../types';
 type PostItem = Omit<Post, 'created_at'>;
 type Props = {
   postItem: PostItem;
-  setPosition: Dispatch<
-    SetStateAction<{
-      lat: number;
-      lng: number;
-    }>
-  >;
-  setItem: Dispatch<
-    SetStateAction<{
-      title: string;
-    }>
-  >;
 };
 
-export const PostItemMemo: FC<Props> = ({ postItem, setPosition, setItem }) => {
+export const PostItemMemo: FC<Props> = ({ postItem }) => {
   const { id, title, post_url, user_id, business_day, latlng } = postItem;
   const session = useStore((state) => state.session);
   const update = useStore((state) => state.updateEditedPost);
+  const setPosition = useStore((state) => state.setPosition);
+  const setRestaurantInfo = useStore((state) => state.setRestaurantInfo);
   const { deletePostMutation } = useMutatePost();
 
   const { fullUrl: postUrl } = useDownloadUrl(post_url, 'posts');
 
-  const imgArea = () => {
-    if (postUrl) {
-      return (
-        <AspectRatio
-          ratio={1 / 1}
-          style={{ width: 240, marginLeft: 'auto', marginRight: 'auto' }}
-        >
-          <MantineImage src={postUrl} alt='Norway' />
-        </AspectRatio>
-      );
-    } else {
-      return (
-        <AspectRatio
-          ratio={1 / 1}
-          style={{ width: 240, marginLeft: 'auto', marginRight: 'auto' }}
-        >
-          <MantineImage
-            src='undefined'
-            alt='With default placeholder'
-            width={500}
-            height={500}
-            withPlaceholder
-          />
-        </AspectRatio>
-      );
-    }
-  };
-
   const onClick = () => {
     if (latlng === null) return;
     setPosition({ lat: Number(latlng?.lat), lng: Number(latlng?.lng) });
-    setItem({ title: title });
+    setRestaurantInfo({ title: title });
   };
 
   return (
     <>
       <Card shadow='sm' p='lg' radius='md' withBorder onClick={onClick}>
-        <Card.Section>{imgArea()}</Card.Section>
+        <Card.Section>
+          <AspectImg imgUrl={postUrl} />
+        </Card.Section>
         <Text size='xl' weight={500}>
           {title}
         </Text>

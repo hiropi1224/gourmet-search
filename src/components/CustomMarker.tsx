@@ -1,31 +1,15 @@
-import React, {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { Text } from '@mantine/core';
 import { LeafletMouseEvent } from 'leaflet';
 
 import { Marker, Popup, useMap, useMapEvent } from 'react-leaflet';
+import useStore from '@/store';
 
-type Props = {
-  position: {
-    lat: number;
-    lng: number;
-  };
-  setPosition: Dispatch<
-    SetStateAction<{
-      lat: number;
-      lng: number;
-    }>
-  >;
-  title?: string;
-};
-
-const CustomMarker: FC<Props> = ({ position, setPosition, title }) => {
+const CustomMarker: FC = () => {
   const map = useMap();
+  const position = useStore((state) => state.position);
+  const setPosition = useStore((state) => state.setPosition);
+  const restaurantInfo = useStore((state) => state.restaurantInfo);
   const onClick: (event: LeafletMouseEvent) => void = useCallback((e) => {
     setPosition({ lat: e.latlng.lat, lng: e.latlng.lng });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +27,7 @@ const CustomMarker: FC<Props> = ({ position, setPosition, title }) => {
   ) : (
     <Marker position={position}>
       <Popup>
-        <Text>{title}</Text>
+        <Text>{restaurantInfo.title}</Text>
         <Text>{`lat:${position.lat}`}</Text>
         <Text>{`lng:${position.lng}`}</Text>
       </Popup>

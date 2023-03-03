@@ -1,6 +1,6 @@
-import { AspectImg } from '@/components/features/PostList/AspectImg';
-import { Card, Group, Text } from '@mantine/core';
 import React, { FC } from 'react';
+import { Card, Group, Text } from '@mantine/core';
+import { AspectImg } from '@/components/features/PostList/AspectImg';
 
 type Props = {
   title: string;
