@@ -6,7 +6,7 @@ type Props = {
   title: string;
   imgUrl?: string;
   onClickCard: () => void;
-  BusinessDay: JSX.Element;
+  BusinessDay: JSX.Element[];
   EditAction?: JSX.Element;
 };
 

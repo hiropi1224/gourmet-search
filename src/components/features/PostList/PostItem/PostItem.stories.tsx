@@ -30,18 +30,18 @@ const EditAction = (
   </div>
 );
 
+const business_day = ['月', '火'];
+
 export const Primary = Template.bind({});
 Primary.args = {
   title: 'title',
   imgUrl: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2',
   onClickCard: () => {},
-  BusinessDay: (
-    <>
-      <Text size='sm'>月曜</Text>
-      <Text size='sm'>火曜</Text>
-      <Text size='sm'>水曜</Text>
-    </>
-  ),
+  BusinessDay: business_day.map((day, i) => (
+    <Text key={i} size='sm'>
+      {`${day}曜`}
+    </Text>
+  )),
 };
 
 export const WithEditAction = Template.bind({});
@@ -49,12 +49,10 @@ WithEditAction.args = {
   title: 'title',
   imgUrl: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2',
   onClickCard: () => {},
-  BusinessDay: (
-    <>
-      <Text size='sm'>月曜</Text>
-      <Text size='sm'>火曜</Text>
-      <Text size='sm'>水曜</Text>
-    </>
-  ),
+  BusinessDay: business_day.map((day, i) => (
+    <Text key={i} size='sm'>
+      {`${day}曜`}
+    </Text>
+  )),
   EditAction: EditAction,
 };
