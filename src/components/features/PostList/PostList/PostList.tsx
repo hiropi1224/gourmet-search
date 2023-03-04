@@ -43,6 +43,7 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
                 {`${day}曜`}
               </Text>
             ))}
+            imgUrl={post.post_url}
             EditAction={
               session?.user?.id === post.user_id ? (
                 <>

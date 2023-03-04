@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Card, Group, Text } from '@mantine/core';
+import { useDownloadUrl } from '@/hooks/useDownloadUrl';
 import { AspectImg } from '@/components/features/PostList/AspectImg';
 
 type Props = {
@@ -17,10 +18,12 @@ export const PostItem: FC<Props> = ({
   BusinessDay,
   EditAction,
 }) => {
+  const { fullUrl: postUrl } = useDownloadUrl(imgUrl, 'posts');
+
   return (
     <Card shadow='sm' p='lg' radius='md' withBorder onClick={onClickCard}>
       <Card.Section>
-        <AspectImg imgUrl={imgUrl} />
+        <AspectImg imgUrl={postUrl} />
       </Card.Section>
       <Text size='xl' weight={500}>
         {title}

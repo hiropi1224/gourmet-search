@@ -27,10 +27,10 @@ export const useMutatePost: () => {
     },
     {
       onSuccess: () => {
-        router.push('/search');
         initializePosition();
         reset();
         notification();
+        router.push('/search');
       },
       onError: (err: any) => {
         alert(err.message);
