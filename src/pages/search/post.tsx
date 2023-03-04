@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 import { Auth } from '@/components/Auth';
-import { Layout } from '@/components/Layout/Layout';
+import { Layout } from '@/components/features/Common/Layout';
 import { PostForm } from '@/components/PostForm';
 
 const Search: CustomNextPage = () => {
