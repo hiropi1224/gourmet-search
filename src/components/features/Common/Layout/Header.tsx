@@ -1,5 +1,5 @@
 import router from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import {
   createStyles,
   Header,
@@ -12,6 +12,7 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 
 const useStyles = createStyles((theme) => ({
@@ -87,7 +88,15 @@ export const CustomHeader: FC = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const { classes, theme } = useStyles();
+  const session = useStore((state) => state.session);
+  const setSession = useStore((state) => state.setSession);
 
+  useEffect(() => {
+    supabase.auth.getSession().then((res) => setSession(res.data.session));
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, [setSession]);
   const onClick = (path: string) => {
     router.push(path);
   };
@@ -121,15 +130,17 @@ export const CustomHeader: FC = () => {
             </Button>
           </Group>
 
-          <Group className={classes.hiddenMobile}>
-            <Button
-              onClick={() => {
-                void supabase.auth.signOut();
-              }}
-            >
-              ログアウト
-            </Button>
-          </Group>
+          {session && (
+            <Group className={classes.hiddenMobile}>
+              <Button
+                onClick={() => {
+                  void supabase.auth.signOut();
+                }}
+              >
+                ログアウト
+              </Button>
+            </Group>
+          )}
 
           <Burger
             opened={drawerOpened}
@@ -178,11 +189,13 @@ export const CustomHeader: FC = () => {
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
 
-          <Group position='center' grow pb='xl' px='md'>
-            <Button onClick={() => void supabase.auth.signOut()}>
-              ログアウト
-            </Button>
-          </Group>
+          {session && (
+            <Group position='center' grow pb='xl' px='md'>
+              <Button onClick={() => void supabase.auth.signOut()}>
+                ログアウト
+              </Button>
+            </Group>
+          )}
         </ScrollArea>
       </Drawer>
     </Box>
