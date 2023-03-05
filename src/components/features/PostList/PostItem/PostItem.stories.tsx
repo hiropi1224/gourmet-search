@@ -36,7 +36,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   title: 'title',
   imgUrl: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2',
-  onClickCard: () => {},
   BusinessDay: business_day.map((day, i) => (
     <Text key={i} size='sm'>
       {`${day}曜`}
@@ -48,7 +47,6 @@ export const WithEditAction = Template.bind({});
 WithEditAction.args = {
   title: 'title',
   imgUrl: 'https://images.unsplash.com/photo-1627552245715-77d79bbf6fe2',
-  onClickCard: () => {},
   BusinessDay: business_day.map((day, i) => (
     <Text key={i} size='sm'>
       {`${day}曜`}

@@ -1,12 +1,16 @@
 import React, { FC } from 'react';
 import { Card, Group, Text } from '@mantine/core';
 import { useDownloadUrl } from '@/hooks/useDownloadUrl';
+import useStore from '@/store';
 import { AspectImg } from '@/components/features/PostList/AspectImg';
 
 type Props = {
   title: string;
   imgUrl?: string;
-  onClickCard: () => void;
+  position: {
+    lat: string;
+    lng: string;
+  } | null;
   BusinessDay: JSX.Element[];
   EditAction?: JSX.Element;
 };
@@ -14,14 +18,27 @@ type Props = {
 export const PostItem: FC<Props> = ({
   title,
   imgUrl = '',
-  onClickCard,
   BusinessDay,
   EditAction,
+  position,
 }) => {
+  const setPosition = useStore((state) => state.setPosition);
   const { fullUrl: postUrl } = useDownloadUrl(imgUrl, 'posts');
 
+  const onClickCard = (position: { lat: string; lng: string } | null) => {
+    if (position !== null) {
+      setPosition({ lat: Number(position.lat), lng: Number(position.lng) });
+    }
+  };
+
   return (
-    <Card shadow='sm' p='lg' radius='md' withBorder onClick={onClickCard}>
+    <Card
+      shadow='sm'
+      p='lg'
+      radius='md'
+      withBorder
+      onClick={() => onClickCard(position)}
+    >
       <Card.Section>
         <AspectImg imgUrl={postUrl} />
       </Card.Section>

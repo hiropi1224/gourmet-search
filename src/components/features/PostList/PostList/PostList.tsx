@@ -14,16 +14,9 @@ type Props = {
 
 export const PostList: FC<Props> = ({ posts, session = null }) => {
   const update = useStore((state) => state.updateEditedPost);
-  const setPosition = useStore((state) => state.setPosition);
   const { deletePostMutation } = useMutatePost();
 
   if (posts === undefined) return null;
-
-  const onClickCard = (position: { lat: string; lng: string } | null) => {
-    if (position !== null) {
-      setPosition({ lat: Number(position.lat), lng: Number(position.lng) });
-    }
-  };
 
   return (
     <div>
@@ -44,6 +37,7 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
               </Text>
             ))}
             imgUrl={post.post_url}
+            position={post.latlng}
             EditAction={
               session?.user?.id === post.user_id ? (
                 <>
@@ -69,7 +63,6 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
                 <></>
               )
             }
-            onClickCard={() => onClickCard}
           />
         ))}
       </SimpleGrid>
