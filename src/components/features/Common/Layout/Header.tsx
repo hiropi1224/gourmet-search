@@ -1,3 +1,4 @@
+import router from 'next/router';
 import { FC } from 'react';
 import {
   createStyles,
@@ -11,7 +12,6 @@ import {
   ScrollArea,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import router from 'next/router';
 import { supabase } from '@/utils/supabase';
 
 const useStyles = createStyles((theme) => ({
@@ -122,7 +122,13 @@ export const CustomHeader: FC = () => {
           </Group>
 
           <Group className={classes.hiddenMobile}>
-            <Button onClick={() => supabase.auth.signOut()}>ログアウト</Button>
+            <Button
+              onClick={() => {
+                void supabase.auth.signOut();
+              }}
+            >
+              ログアウト
+            </Button>
           </Group>
 
           <Burger
@@ -173,7 +179,9 @@ export const CustomHeader: FC = () => {
           />
 
           <Group position='center' grow pb='xl' px='md'>
-            <Button onClick={() => supabase.auth.signOut()}>ログアウト</Button>
+            <Button onClick={() => void supabase.auth.signOut()}>
+              ログアウト
+            </Button>
           </Group>
         </ScrollArea>
       </Drawer>

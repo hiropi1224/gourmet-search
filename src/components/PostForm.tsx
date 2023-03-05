@@ -1,19 +1,16 @@
-import { FormEvent, FC, memo, useMemo, useState, useEffect } from 'react';
-import { CameraIcon } from '@heroicons/react/solid';
+import dynamic from 'next/dynamic';
+import { FormEvent, FC, memo, useMemo, useEffect } from 'react';
 import {
   TextInput,
-  Loader,
   Button,
   Box,
   Space,
   Image,
   Center,
-  Text,
-  Group,
   MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import dynamic from 'next/dynamic';
+import { ImageDrop } from '@/components/features/Common/ImageDrop';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -23,16 +20,13 @@ export const PostFormMemo: FC = () => {
   const session = useStore((state) => state.session);
   const editedPost = useStore((state) => state.editedPost);
   const update = useStore((state) => state.updateEditedPost);
+  const position = useStore((state) => state.position);
   const { createPostMutation, updatePostMutation } = useMutatePost();
   const { useMutateUploadPostImg } = useUploadPostImg();
   const { fullUrl: postUrl, setFullUrl } = useDownloadUrl(
     editedPost.post_url,
     'posts'
   );
-  const [position, setPosition] = useState({
-    lat: 35.672909594409305,
-    lng: 139.71265654633325,
-  });
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,6 +80,7 @@ export const PostFormMemo: FC = () => {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line eqeqeq
     if (editedPost.latlng == null) return;
     if (
       Number(editedPost.latlng.lat) !== position.lat &&
@@ -95,7 +90,7 @@ export const PostFormMemo: FC = () => {
         ...editedPost,
         latlng: { lat: position.lat.toString(), lng: position.lng.toString() },
       });
-  }, [editedPost.latlng]);
+  }, [editedPost, editedPost.latlng, position.lat, position.lng, update]);
 
   const width = (window.innerWidth * 2) / 3;
 
@@ -106,13 +101,12 @@ export const PostFormMemo: FC = () => {
           mt='md'
           label='店名'
           placeholder='店名'
+          required
           value={editedPost.title}
           onChange={(e) => update({ ...editedPost, title: e.target.value })}
         />
         <Space m='md' />
-        <MapWithNoSSR
-          Marker={<Marker position={position} setPosition={setPosition} />}
-        />
+        <MapWithNoSSR Marker={<Marker />} />
         <MultiSelect
           mt='md'
           onChange={(e) => update({ ...editedPost, business_day: e })}
@@ -120,6 +114,37 @@ export const PostFormMemo: FC = () => {
           label='営業日'
           placeholder='営業日'
         />
+        <Space m='md' />
+
+        <Center mt='md'>
+          {postUrl && (
+            <Center>
+              <Box>
+                <Image
+                  src={postUrl}
+                  alt='Image'
+                  className='rounded'
+                  width={300}
+                  height={300}
+                />
+                <Button
+                  onClick={() => setFullUrl('')}
+                  variant='default'
+                  color='red'
+                  sx={{ width: '100%', marginTop: '1rem' }}
+                >
+                  画像削除
+                </Button>
+              </Box>
+            </Center>
+          )}
+        </Center>
+
+        {!postUrl && (
+          <Center mt='md'>
+            <ImageDrop />
+          </Center>
+        )}
         <Space m='md' />
         <Button
           m='auto'
@@ -131,44 +156,6 @@ export const PostFormMemo: FC = () => {
         >
           {editedPost.id ? 'Update' : 'Create'}
         </Button>
-
-        <Center mt='md'>
-          {postUrl && (
-            <Image
-              src={postUrl}
-              alt='Image'
-              className='rounded'
-              width={300}
-              height={300}
-            />
-          )}
-        </Center>
-        <Center mt='md'>
-          {useMutateUploadPostImg.isLoading && <Loader />}
-        </Center>
-        <Center mt='md'>
-          <label htmlFor='post'>
-            <Group position='apart'>
-              <CameraIcon className='h-7 w-7 cursor-pointer text-gray-500' />
-              <Text>画像追加</Text>
-            </Group>
-          </label>
-          <input
-            className='hidden'
-            type='file'
-            id='post'
-            accept='image/*'
-            onChange={async (e) => {
-              await useMutateUploadPostImg.mutateAsync(e);
-              e.target.value = '';
-            }}
-          />
-        </Center>
-        <Center>
-          <Button onClick={() => setFullUrl('')} variant='default' color='red'>
-            画像削除
-          </Button>
-        </Center>
       </form>
     </Box>
   );

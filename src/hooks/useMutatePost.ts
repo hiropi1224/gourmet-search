@@ -1,5 +1,5 @@
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import router from 'next/router';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { notification } from '@/utils/notification';
 import useStore from '../store';
 import { Post, EditedPost } from '../types';
@@ -16,6 +16,7 @@ export const useMutatePost: () => {
   updatePostMutation: UseMutationResult<undefined[], any, EditedPost, unknown>;
 } = () => {
   const reset = useStore((state) => state.resetEditedPost);
+  const initializePosition = useStore((state) => state.initializePosition);
 
   const createPostMutation = useMutation(
     async (post: Omit<Post, 'id' | 'created_at'>) => {
@@ -26,9 +27,10 @@ export const useMutatePost: () => {
     },
     {
       onSuccess: () => {
-        router.push('/search');
+        initializePosition();
         reset();
         notification();
+        router.push('/search');
       },
       onError: (err: any) => {
         alert(err.message);

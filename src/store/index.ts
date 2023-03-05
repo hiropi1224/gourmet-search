@@ -8,6 +8,16 @@ type State = {
   editedPost: EditedPost;
   updateEditedPost: (payload: EditedPost) => void;
   resetEditedPost: () => void;
+  setPosition: (payload: { lat: number; lng: number }) => void;
+  position: {
+    lat: number;
+    lng: number;
+  };
+  initializePosition: () => void;
+  setRestaurantInfo: (payload: { title: string }) => void;
+  restaurantInfo: {
+    title: string;
+  };
 };
 const useStore = create<State>((set) => ({
   session: null,
@@ -41,6 +51,37 @@ const useStore = create<State>((set) => ({
         latlng: { lat: '', lng: '' },
       },
     }),
+
+  setPosition: (payload) =>
+    set({
+      position: {
+        lat: payload.lat,
+        lng: payload.lng,
+      },
+    }),
+  initializePosition: () =>
+    set({
+      position: {
+        lat: 35.672909594409305,
+        lng: 139.71265654633325,
+      },
+    }),
+
+  setRestaurantInfo: (payload) =>
+    set({
+      restaurantInfo: {
+        title: payload.title,
+      },
+    }),
+
+  position: {
+    lat: 35.672909594409305,
+    lng: 139.71265654633325,
+  },
+
+  restaurantInfo: {
+    title: '',
+  },
 }));
 
 export default useStore;

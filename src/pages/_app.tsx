@@ -1,9 +1,9 @@
 import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import type { AppProps } from 'next/app';
 
 const queryClient = new QueryClient({
   defaultOptions: {

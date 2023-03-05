@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
 import { CustomNextPage } from 'next';
+import React, { useEffect } from 'react';
 
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 import { Auth } from '@/components/Auth';
-import { Layout } from '@/components/Layout/Layout';
-import { PostView } from '@/components/PostView';
+import { Layout } from '@/components/features/Common/Layout';
+import { PostView } from '@/components/features/PostList/PostView';
 
 const Search: CustomNextPage = () => {
   const session = useStore((state) => state.session);

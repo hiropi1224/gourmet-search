@@ -1,24 +1,19 @@
-import { ChangeEvent } from 'react';
+import { FileWithPath } from '@mantine/dropzone';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import useStore from '../store';
 import { supabase } from '../utils/supabase';
 
 export const useUploadPostImg: () => {
-  useMutateUploadPostImg: UseMutationResult<
-    void,
-    any,
-    ChangeEvent<HTMLInputElement>,
-    unknown
-  >;
+  useMutateUploadPostImg: UseMutationResult<void, any, FileWithPath[], unknown>;
 } = () => {
   const editedPost = useStore((state) => state.editedPost);
   const updatePost = useStore((state) => state.updateEditedPost);
   const useMutateUploadPostImg = useMutation(
-    async (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.target.files || e.target.files.length === 0) {
+    async (files: FileWithPath[]) => {
+      if (files.length === 0) {
         throw new Error('Please select the image file');
       }
-      const file = e.target.files[0];
+      const file = files[0];
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random()}.${fileExt}`;
       const filePath = `${fileName}`;

@@ -1,3 +1,5 @@
+import { CustomNextPage } from 'next';
+import Head from 'next/head';
 import { useState } from 'react';
 import {
   Badge,
@@ -9,10 +11,8 @@ import {
   Loader,
   Anchor,
 } from '@mantine/core';
-import { CustomNextPage } from 'next';
-import Head from 'next/head';
 import { Results } from '@/types';
-import { Layout } from '@/components/Layout/Layout';
+import { Layout } from '@/components/features/Common/Layout';
 import { SearchForm } from '@/components/SearchForm';
 
 const Home: CustomNextPage = () => {
