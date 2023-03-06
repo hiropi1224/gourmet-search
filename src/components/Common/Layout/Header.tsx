@@ -117,14 +117,14 @@ export const CustomHeader: FC = () => {
             <Button
               variant='subtle'
               radius='xs'
-              onClick={() => onClick('/search')}
+              onClick={() => onClick('/post')}
             >
               投稿一覧
             </Button>
             <Button
               variant='subtle'
               radius='xs'
-              onClick={() => onClick('/search/post')}
+              onClick={() => onClick('/post/postForm')}
             >
               投稿フォーム
             </Button>
@@ -169,17 +169,13 @@ export const CustomHeader: FC = () => {
             検索
           </Button>
 
-          <Button
-            variant='subtle'
-            radius='xs'
-            onClick={() => onClick('/search')}
-          >
+          <Button variant='subtle' radius='xs' onClick={() => onClick('/post')}>
             投稿一覧
           </Button>
           <Button
             variant='subtle'
             radius='xs'
-            onClick={() => onClick('/search/post')}
+            onClick={() => onClick('/post/postForm')}
           >
             投稿フォーム
           </Button>
