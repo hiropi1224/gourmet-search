@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { SimpleGrid, Text } from '@mantine/core';
 import { Session } from '@supabase/supabase-js';
 import { useMutatePost } from '@/hooks/useMutatePost';
@@ -14,7 +14,12 @@ type Props = {
 
 export const PostList: FC<Props> = ({ posts, session = null }) => {
   const update = useStore((state) => state.updateEditedPost);
+  const initializePosition = useStore((state) => state.initializePosition);
   const { deletePostMutation } = useMutatePost();
+
+  useEffect(() => {
+    initializePosition();
+  }, [initializePosition]);
 
   if (posts === undefined) return null;
 
