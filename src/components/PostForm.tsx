@@ -10,7 +10,7 @@ import {
   MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import { ImageDrop } from '@/components/features/Common/ImageDrop';
+import { ImageDrop } from '@/components/Common/ImageDrop';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -21,12 +21,17 @@ export const PostFormMemo: FC = () => {
   const editedPost = useStore((state) => state.editedPost);
   const update = useStore((state) => state.updateEditedPost);
   const position = useStore((state) => state.position);
+  const initializePosition = useStore((state) => state.initializePosition);
   const { createPostMutation, updatePostMutation } = useMutatePost();
   const { useMutateUploadPostImg } = useUploadPostImg();
   const { fullUrl: postUrl, setFullUrl } = useDownloadUrl(
     editedPost.post_url,
     'posts'
   );
+
+  useEffect(() => {
+    initializePosition();
+  }, [initializePosition]);
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
