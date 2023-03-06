@@ -1,30 +1,28 @@
 import React, { FC, useEffect } from 'react';
 import { SimpleGrid, Text } from '@mantine/core';
 import { Session } from '@supabase/supabase-js';
+import { UseMutationResult } from '@tanstack/react-query';
 import { useMutatePost } from '@/hooks/useMutatePost';
 import useStore from '@/store';
-import { Post } from '@/types';
+import { EditedPost, Post } from '@/types';
 import { EditAction } from '@/components/features/Common/EditAction';
 import { PostItem } from '@/components/features/PostList/PostItem';
 
 type Props = {
   posts: Post[];
   session: Session;
+  update: (payload: EditedPost) => void;
+  deletePostMutation: UseMutationResult<undefined[], any, string, unknown>;
 };
 
-export const PostList: FC<Props> = ({ posts, session = null }) => {
-  const update = useStore((state) => state.updateEditedPost);
-  const initializePosition = useStore((state) => state.initializePosition);
-  const { deletePostMutation } = useMutatePost();
-
-  useEffect(() => {
-    initializePosition();
-  }, [initializePosition]);
-
-  if (posts === undefined) return null;
-
+export const PostListTemplate: FC<Props> = ({
+  posts,
+  session,
+  update,
+  deletePostMutation,
+}) => {
   return (
-    <div>
+    <>
       <SimpleGrid
         breakpoints={[
           { minWidth: 'sm', cols: 2 },
@@ -71,6 +69,27 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
           />
         ))}
       </SimpleGrid>
-    </div>
+    </>
+  );
+};
+
+export const PostList: FC<Props> = ({ posts, session = null }) => {
+  const update = useStore((state) => state.updateEditedPost);
+  const initializePosition = useStore((state) => state.initializePosition);
+  const { deletePostMutation } = useMutatePost();
+
+  useEffect(() => {
+    initializePosition();
+  }, [initializePosition]);
+
+  if (posts === undefined || session === null) return null;
+
+  return (
+    <PostListTemplate
+      posts={posts}
+      session={session}
+      update={update}
+      deletePostMutation={deletePostMutation}
+    />
   );
 };

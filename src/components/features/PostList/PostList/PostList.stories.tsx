@@ -1,15 +1,15 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { PostList } from './PostList';
+import { PostListTemplate } from './PostList';
 
 export default {
   title: 'Post/PostList',
-  component: PostList,
-} as ComponentMeta<typeof PostList>;
+  component: PostListTemplate,
+} as ComponentMeta<typeof PostListTemplate>;
 
-const Template: ComponentStory<typeof PostList> = (args) => (
-  <PostList {...args}></PostList>
+const Template: ComponentStory<typeof PostListTemplate> = (args) => (
+  <PostListTemplate {...args}></PostListTemplate>
 );
 
 const posts = [
@@ -17,18 +17,18 @@ const posts = [
     id: '1',
     created_at: '',
     user_id: '1',
-    title: 'title',
+    title: 'title 1',
     post_url: 'string',
     business_day: ['月', '火'],
     latlng: { lat: '', lng: '' },
   },
   {
-    id: '1',
+    id: '2',
     created_at: '',
     user_id: '1',
-    title: 'title',
+    title: 'title 2',
     post_url: 'string',
-    business_day: ['月', '火'],
+    business_day: ['水'],
     latlng: { lat: '', lng: '' },
   },
 ];
