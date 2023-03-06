@@ -10,7 +10,7 @@ import {
   MultiSelect,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import { ImageDrop } from '@/components/features/Common/ImageDrop';
+import { ImageDrop } from '@/components/Common/ImageDrop';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
