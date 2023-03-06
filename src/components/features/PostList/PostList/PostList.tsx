@@ -73,10 +73,13 @@ export const PostListTemplate: FC<Props> = ({
   );
 };
 
-export const PostList: FC<Props> = ({ posts, session = null }) => {
+export const PostList: FC<Omit<Props, 'update' | 'deletePostMutation'>> = ({
+  posts,
+  session = null,
+}) => {
   const update = useStore((state) => state.updateEditedPost);
-  const initializePosition = useStore((state) => state.initializePosition);
   const { deletePostMutation } = useMutatePost();
+  const initializePosition = useStore((state) => state.initializePosition);
 
   useEffect(() => {
     initializePosition();
