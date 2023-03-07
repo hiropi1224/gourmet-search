@@ -5,7 +5,7 @@ import { UseMutationResult } from '@tanstack/react-query';
 import { useMutatePost } from '@/hooks/useMutatePost';
 import useStore from '@/store';
 import { EditedPost, Post } from '@/types';
-import { EditAction } from '@/common/component/EditAction';
+import { EditAction } from '@/common/components/EditAction';
 import { PostItem } from '@/features/postList/components/PostItem';
 
 type Props = {

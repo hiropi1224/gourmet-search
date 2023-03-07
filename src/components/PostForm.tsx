@@ -8,9 +8,10 @@ import {
   Image,
   Center,
   MultiSelect,
+  SimpleGrid,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import { ImageDrop } from '@/common/component/ImageDrop';
+import { ImageDrop } from '@/common/components/ImageDrop';
 import { useDownloadUrl } from '../hooks/useDownloadUrl';
 import { useMutatePost } from '../hooks/useMutatePost';
 import { useUploadPostImg } from '../hooks/useUploadPostImg';
@@ -68,7 +69,7 @@ export const PostFormMemo: FC = () => {
   ];
   const MapWithNoSSR = useMemo(
     () =>
-      dynamic(() => import('@/components/PostMap'), {
+      dynamic(() => import('@/components/Map'), {
         loading: () => <p>A map is loading</p>,
         ssr: false,
       }),
@@ -97,13 +98,10 @@ export const PostFormMemo: FC = () => {
       });
   }, [editedPost, editedPost.latlng, position.lat, position.lng, update]);
 
-  const width = (window.innerWidth * 2) / 3;
-
   return (
-    <Box sx={{ maxWidth: 800, minWidth: 300, width: width }} mx='auto'>
+    <SimpleGrid sx={{ maxWidth: 800, margin: 'auto' }}>
       <form onSubmit={submitHandler}>
         <TextInput
-          mt='md'
           label='店名'
           placeholder='店名'
           required
@@ -162,7 +160,7 @@ export const PostFormMemo: FC = () => {
           {editedPost.id ? 'Update' : 'Create'}
         </Button>
       </form>
-    </Box>
+    </SimpleGrid>
   );
 };
 export const PostForm = memo(PostFormMemo);

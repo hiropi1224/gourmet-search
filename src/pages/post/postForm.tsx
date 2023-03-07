@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
-import { Layout } from '@/common/component/Layout';
+import { Layout } from '@/common/components/Layout';
 import { Auth } from '@/components/Auth';
 import { PostForm } from '@/components/PostForm';
 

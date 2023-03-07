@@ -12,7 +12,7 @@ import {
   Anchor,
 } from '@mantine/core';
 import { Results } from '@/types';
-import { Layout } from '@/common/component/Layout';
+import { Layout } from '@/common/components/Layout';
 import { SearchForm } from '@/components/SearchForm';
 
 const Home: CustomNextPage = () => {

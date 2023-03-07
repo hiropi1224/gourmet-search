@@ -33,7 +33,7 @@ module.exports = (plop) => {
       const generatePath = (features, type) => {
         let path;
         if (features === 'common') {
-          path = `../src/${data.features}/`;
+          path = `../src/${data.features}/components`;
         } else if (type === 'component') {
           path = `../src/features/${data.features}/components/`; // '../src/features/postList'
         } else {
