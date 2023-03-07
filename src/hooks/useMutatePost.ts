@@ -30,7 +30,7 @@ export const useMutatePost: () => {
         initializePosition();
         reset();
         notification();
-        router.push('/search');
+        router.push('/post');
       },
       onError: (err: any) => {
         alert(err.message);

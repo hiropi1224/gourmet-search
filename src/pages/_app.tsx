@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { MantineProvider } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
+import { Notifications } from '@mantine/notifications';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -24,9 +24,8 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
           colorScheme: 'dark',
         }}
       >
-        <NotificationsProvider position='top-right'>
-          <Component {...pageProps} />
-        </NotificationsProvider>
+        <Notifications position='top-right' />
+        <Component {...pageProps} />
       </MantineProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
