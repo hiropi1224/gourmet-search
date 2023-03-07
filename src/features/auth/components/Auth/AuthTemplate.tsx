@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { ShieldCheckIcon } from '@heroicons/react/outline';
 import {
   TextInput,
@@ -8,43 +8,31 @@ import {
   PasswordInput,
   Center,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { UseFormReturnType } from '@mantine/form';
 import { IconDatabase } from '@tabler/icons';
-import { useMutateAuth } from '@/hooks/useMutateAuth';
 
-export const Auth: FC = () => {
-  const { loginMutation, registerMutation } = useMutateAuth();
-  const [isRegister, setIsRegister] = useState(false);
+type Props = {
+  form: UseFormReturnType<{
+    email: string;
+    password: string;
+  }>;
+  handleSubmit: (values: { email: string; password: string }) => Promise<void>;
+  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
+  isRegister: boolean;
+};
 
-  const form = useForm({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) =>
-        value.length < 6 ? 'Name must have at least 6 letters' : null,
-    },
-    validateInputOnChange: true,
-  });
-
-  const handleSubmit = async (values: { email: string; password: string }) => {
-    if (isRegister) {
-      registerMutation.mutate(values);
-    } else {
-      loginMutation.mutate(values);
-    }
-  };
-
+export const AuthTemplate: FC<Props> = ({
+  form,
+  handleSubmit,
+  setIsRegister,
+  isRegister,
+}) => {
   return (
     <Center style={{ flexDirection: 'column' }}>
       <ShieldCheckIcon className='h-16 w-16 text-blue-500' />
 
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <TextInput
-          withAsterisk
           required
           label='Email'
           placeholder='your@email.com'
