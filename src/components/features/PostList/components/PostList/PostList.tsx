@@ -6,7 +6,7 @@ import { useMutatePost } from '@/hooks/useMutatePost';
 import useStore from '@/store';
 import { EditedPost, Post } from '@/types';
 import { EditAction } from '@/components/Common/EditAction';
-import { PostItem } from '@/components/features/PostList/PostItem';
+import { PostItem } from '@/components/features/PostList/components/PostItem';
 
 type Props = {
   posts: Post[];
