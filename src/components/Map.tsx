@@ -16,14 +16,12 @@ type Props = {
 };
 
 const Map: FC<Props> = ({ Marker }) => {
-  const wid = window.innerWidth / 2 > 300 ? window.innerWidth / 2 : 300;
-
   return (
     <MapContainer
       center={initPosition}
       zoom={18}
       scrollWheelZoom={true}
-      style={{ height: '400px', width: wid, margin: 'auto' }}
+      style={{ height: '400px', margin: 'auto' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

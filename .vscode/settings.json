@@ -30,5 +30,6 @@
   },
   "[typescriptreact]": {
     "editor.formatOnSave": true
-  }
+  },
+  "explorer.compactFolders": false
 }

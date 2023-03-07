@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Card, Group, Text } from '@mantine/core';
 import { useDownloadUrl } from '@/hooks/useDownloadUrl';
 import useStore from '@/store';
-import { AspectImg } from '@/components/features/PostList/AspectImg';
+import { AspectImg } from '@/features/postList/components/AspectImg';
 
 type Props = {
   title: string;
