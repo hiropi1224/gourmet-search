@@ -3,7 +3,7 @@ import React, { FC, useMemo } from 'react';
 import { Space } from '@mantine/core';
 import { useQueryPosts } from '@/hooks/useQueryPosts';
 import useStore from '@/store';
-import { PostList } from '@/components/features/PostList/components/PostList';
+import { PostList } from '@/features/postList/components/PostList';
 
 export const Post: FC = () => {
   const { data: posts } = useQueryPosts();

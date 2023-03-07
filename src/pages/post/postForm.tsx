@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
+import { Layout } from '@/common/component/Layout';
 import { Auth } from '@/components/Auth';
-import { Layout } from '@/components/Common/Layout';
 import { PostForm } from '@/components/PostForm';
 
 const Search: CustomNextPage = () => {

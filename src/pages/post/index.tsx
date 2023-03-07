@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
+import { Layout } from '@/common/component/Layout';
 import { Auth } from '@/components/Auth';
-import { Layout } from '@/components/Common/Layout';
-import { Post } from '@/components/features/PostList/page/Post';
+import { Post } from '@/features/postList/page/Post';
 
 const Search: CustomNextPage = () => {
   const session = useStore((state) => state.session);
