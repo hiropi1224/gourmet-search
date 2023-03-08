@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
-import {
-  FormType,
-  MantineFormType,
-  UseStateFuncType,
-} from '@/features/auth/types';
+import { FormType, MantineFormType } from '@/features/auth/types';
 import { useMutateAuth } from '@/hooks/useMutateAuth';
+import { UseStateFuncType } from '@/types';
 
 export const useAuthView = (): {
   form: MantineFormType;

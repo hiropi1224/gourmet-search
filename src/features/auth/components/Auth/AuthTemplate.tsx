@@ -9,11 +9,8 @@ import {
   Center,
 } from '@mantine/core';
 import { IconDatabase } from '@tabler/icons';
-import {
-  FormType,
-  MantineFormType,
-  UseStateFuncType,
-} from '@/features/auth/types';
+import { FormType, MantineFormType } from '@/features/auth/types';
+import { UseStateFuncType } from '@/types';
 
 type Props = {
   form: MantineFormType;
