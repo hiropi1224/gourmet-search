@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { PostListTemplate } from './PostList';
+import { PostListTemplate } from './PostListTemplate';
 
 export default {
-  title: 'Post/PostList',
+  title: 'Post/PostListTemplate',
   component: PostListTemplate,
 } as ComponentMeta<typeof PostListTemplate>;
 
@@ -18,7 +18,7 @@ const posts = [
     created_at: '',
     user_id: '1',
     title: 'title 1',
-    post_url: 'string',
+    post_url: 'https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6',
     business_day: ['月', '火'],
     latlng: { lat: '', lng: '' },
   },
@@ -27,7 +27,7 @@ const posts = [
     created_at: '',
     user_id: '1',
     title: 'title 2',
-    post_url: 'string',
+    post_url: 'https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6',
     business_day: ['水'],
     latlng: { lat: '', lng: '' },
   },
