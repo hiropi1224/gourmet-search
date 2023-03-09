@@ -8,16 +8,14 @@ import {
   PasswordInput,
   Center,
 } from '@mantine/core';
-import { UseFormReturnType } from '@mantine/form';
 import { IconDatabase } from '@tabler/icons';
+import { FormType, MantineFormType } from '@/features/auth/types';
+import { UseStateFuncType } from '@/types';
 
 type Props = {
-  form: UseFormReturnType<{
-    email: string;
-    password: string;
-  }>;
-  handleSubmit: (values: { email: string; password: string }) => Promise<void>;
-  setIsRegister: React.Dispatch<React.SetStateAction<boolean>>;
+  form: MantineFormType;
+  handleSubmit: (values: FormType) => Promise<void>;
+  setIsRegister: UseStateFuncType<boolean>;
   isRegister: boolean;
 };
 

@@ -1,4 +1,5 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
+import { UseStateFuncType } from '@/types';
 import { supabase } from '../utils/supabase';
 
 export const useDownloadUrl: (
@@ -7,7 +8,7 @@ export const useDownloadUrl: (
 ) => {
   isLoading: boolean;
   fullUrl: string;
-  setFullUrl: Dispatch<SetStateAction<string>>;
+  setFullUrl: UseStateFuncType<string>;
 } = (filePath: string | undefined, key: 'posts') => {
   const [isLoading, setIsLoading] = useState(false);
   const [fullUrl, setFullUrl] = useState('');

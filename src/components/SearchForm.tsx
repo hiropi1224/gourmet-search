@@ -1,11 +1,11 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { FC } from 'react';
 import { Box, TextInput, Checkbox, Group, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Results, Root } from '@/types';
+import { Results, Root, UseStateFuncType } from '@/types';
 
 type Props = {
-  setGourmet: Dispatch<SetStateAction<Results | undefined>>;
-  setStatus: Dispatch<SetStateAction<boolean>>;
+  setGourmet: UseStateFuncType<Results | undefined>;
+  setStatus: UseStateFuncType<boolean>;
 };
 
 export const SearchForm: FC<Props> = (props): JSX.Element => {

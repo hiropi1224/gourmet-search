@@ -153,3 +153,8 @@ export type EditedPost = {
   business_day: string[];
   latlng: { lat: string; lng: string } | null;
 };
+
+/**
+ * useStateのset関数型定義
+ */
+export type UseStateFuncType<T> = React.Dispatch<React.SetStateAction<T>>;
