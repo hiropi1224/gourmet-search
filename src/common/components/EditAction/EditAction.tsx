@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline';
+import { TrashIcon } from '@heroicons/react/outline';
 
 type Props = {
   update: () => void;
@@ -7,14 +7,14 @@ type Props = {
   id: string;
 };
 
-export const EditAction: FC<Props> = ({ update, deletePostMutation }) => {
+export const EditAction: FC<Props> = ({ deletePostMutation }) => {
   return (
-    <div className='flex pr-4'>
-      <PencilAltIcon
+    <div className='flex p-2'>
+      {/* <PencilAltIcon
         data-testid='pencil-post'
         className='mx-1 h-5 w-5 cursor-pointer text-blue-500'
         onClick={update}
-      />
+      /> */}
       <TrashIcon
         data-testid='trash-post'
         className='h-5 w-5 cursor-pointer text-blue-500'
