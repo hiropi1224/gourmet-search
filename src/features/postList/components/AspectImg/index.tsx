@@ -1,1 +1,0 @@
-export { AspectImg } from './AspectImg';
