@@ -10,8 +10,10 @@ import {
   Burger,
   Drawer,
   ScrollArea,
+  ActionIcon,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { IconSun, IconMoonStars } from '@tabler/icons';
 import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 
@@ -89,8 +91,9 @@ export const CustomHeader: FC = () => {
     useDisclosure(false);
   const { classes, theme } = useStyles();
   const session = useStore((state) => state.session);
+  const isDark = useStore((state) => state.isDark);
+  const changeIsDark = useStore((state) => state.changeIsDark);
   const setSession = useStore((state) => state.setSession);
-
   useEffect(() => {
     supabase.auth.getSession().then((res) => setSession(res.data.session));
     supabase.auth.onAuthStateChange((_event, session) => {
@@ -130,18 +133,39 @@ export const CustomHeader: FC = () => {
             </Button>
           </Group>
 
-          {session && (
-            <Group className={classes.hiddenMobile}>
-              <Button
-                onClick={() => {
-                  void supabase.auth.signOut();
-                }}
-              >
-                ログアウト
-              </Button>
-            </Group>
-          )}
-
+          <Group position='center'>
+            <ActionIcon
+              onClick={() => changeIsDark(!isDark)}
+              size='lg'
+              sx={(theme) => ({
+                backgroundColor:
+                  theme.colorScheme === 'dark'
+                    ? theme.colors.dark[6]
+                    : theme.colors.gray[0],
+                color:
+                  theme.colorScheme === 'dark'
+                    ? theme.colors.yellow[4]
+                    : theme.colors.blue[6],
+              })}
+            >
+              {isDark ? (
+                <IconSun size='1.2rem' />
+              ) : (
+                <IconMoonStars size='1.2rem' />
+              )}
+            </ActionIcon>
+            {session && (
+              <Group className={classes.hiddenMobile}>
+                <Button
+                  onClick={() => {
+                    void supabase.auth.signOut();
+                  }}
+                >
+                  ログアウト
+                </Button>
+              </Group>
+            )}
+          </Group>
           <Burger
             opened={drawerOpened}
             onClick={toggleDrawer}
@@ -192,6 +216,28 @@ export const CustomHeader: FC = () => {
               </Button>
             </Group>
           )}
+          <Group position='center' my='xl'>
+            <ActionIcon
+              onClick={() => changeIsDark(!isDark)}
+              size='lg'
+              sx={(theme) => ({
+                backgroundColor:
+                  theme.colorScheme === 'dark'
+                    ? theme.colors.dark[6]
+                    : theme.colors.gray[0],
+                color:
+                  theme.colorScheme === 'dark'
+                    ? theme.colors.yellow[4]
+                    : theme.colors.blue[6],
+              })}
+            >
+              {isDark ? (
+                <IconSun size='1.2rem' />
+              ) : (
+                <IconMoonStars size='1.2rem' />
+              )}
+            </ActionIcon>
+          </Group>
         </ScrollArea>
       </Drawer>
     </Box>

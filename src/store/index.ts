@@ -3,6 +3,8 @@ import create from 'zustand';
 import { EditedPost } from '@/types';
 
 type State = {
+  isDark: boolean;
+  changeIsDark: (payload: boolean) => void;
   session: Session | null;
   setSession: (payload: Session | null) => void;
   editedPost: EditedPost;
@@ -20,6 +22,8 @@ type State = {
   };
 };
 const useStore = create<State>((set) => ({
+  isDark: false,
+  changeIsDark: (payload) => set({ isDark: payload }),
   session: null,
   setSession: (payload) => set({ session: payload }),
   editedPost: {
