@@ -22,7 +22,7 @@ type State = {
   };
 };
 const useStore = create<State>((set) => ({
-  isDark: false,
+  isDark: true,
   changeIsDark: (payload) => set({ isDark: payload }),
   session: null,
   setSession: (payload) => set({ session: payload }),
