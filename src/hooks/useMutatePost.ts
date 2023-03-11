@@ -1,5 +1,6 @@
 import router from 'next/router';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { notification } from '@/utils/notification';
 import useStore from '../store';
 import { Post, EditedPost } from '../types';
@@ -15,9 +16,10 @@ export const useMutatePost: () => {
   >;
   updatePostMutation: UseMutationResult<undefined[], any, EditedPost, unknown>;
 } = () => {
+  const queryClient = useQueryClient();
+
   const reset = useStore((state) => state.resetEditedPost);
   const initializePosition = useStore((state) => state.initializePosition);
-
   const createPostMutation = useMutation(
     async (post: Omit<Post, 'id' | 'created_at'>) => {
       const { data, error } = await supabase.from('posts').insert(post);
@@ -31,6 +33,7 @@ export const useMutatePost: () => {
         reset();
         notification();
         router.push('/post');
+        queryClient.invalidateQueries({ queryKey: ['posts'] });
       },
       onError: (err: any) => {
         alert(err.message);
@@ -73,6 +76,7 @@ export const useMutatePost: () => {
     {
       onSuccess: () => {
         reset();
+        queryClient.invalidateQueries({ queryKey: ['posts'] });
       },
       onError: (err: any) => {
         alert(err.message);

@@ -13,7 +13,7 @@ export const ImageDrop: FC<Partial<DropzoneProps>> = (
   return (
     <Dropzone
       onDrop={(files) => useMutateUploadPostImg.mutate(files)}
-      maxSize={3 * 1024 ** 2}
+      maxSize={5 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
       {...props}
     >
