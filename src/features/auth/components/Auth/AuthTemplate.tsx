@@ -35,12 +35,14 @@ export const AuthTemplate: FC<Props> = ({
           required
           label='Email'
           placeholder='your@email.com'
+          size='md'
           {...form.getInputProps('email')}
         />
         <PasswordInput
           placeholder='password'
           label='Password'
           required
+          size='md'
           description='Must be min 6 char'
           {...form.getInputProps('password')}
         />

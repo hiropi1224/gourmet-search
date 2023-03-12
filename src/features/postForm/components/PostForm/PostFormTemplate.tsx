@@ -30,10 +30,12 @@ export const PostFormTemplate: FC<Props> = ({
           label='店名'
           placeholder='店名'
           required
+          size='md'
           {...form.getInputProps('title')}
         />
         <MultiSelect
           mt='md'
+          size='md'
           data={businessDay}
           label='営業日'
           placeholder='営業日'

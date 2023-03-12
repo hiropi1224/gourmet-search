@@ -53,12 +53,16 @@ export const SearchForm: FC<Props> = (props): JSX.Element => {
     <Box sx={{ maxWidth: 300 }} mx='auto'>
       <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
         <TextInput
+          my='md'
+          size='md'
           label='検索キーワード'
           placeholder='キーワード'
           {...form.getInputProps('keyword')}
         />
 
         <Select
+          my='md'
+          size='md'
           label='検索結果の並び順'
           placeholder=''
           data={[
