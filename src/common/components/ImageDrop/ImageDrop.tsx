@@ -1,14 +1,26 @@
 import { FC } from 'react';
 import { Group, Text, useMantineTheme } from '@mantine/core';
-import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
+import {
+  Dropzone,
+  DropzoneProps,
+  FileWithPath,
+  IMAGE_MIME_TYPE,
+} from '@mantine/dropzone';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
-import { useUploadPostImg } from '@/hooks/useUploadPostImg';
+import { UseMutationResult } from '@tanstack/react-query';
 
-export const ImageDrop: FC<Partial<DropzoneProps>> = (
-  props: Partial<DropzoneProps>
-) => {
+type Props = {
+  useMutateUploadPostImg: UseMutationResult<void, any, FileWithPath[], unknown>;
+  props?: Partial<DropzoneProps>;
+  loading: boolean;
+};
+
+export const ImageDrop: FC<Props> = ({
+  props,
+  useMutateUploadPostImg,
+  loading,
+}) => {
   const theme = useMantineTheme();
-  const { useMutateUploadPostImg } = useUploadPostImg();
 
   return (
     <Dropzone
@@ -16,6 +28,7 @@ export const ImageDrop: FC<Partial<DropzoneProps>> = (
       maxSize={5 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
       {...props}
+      loading={loading}
     >
       <Group
         position='center'
@@ -49,7 +62,7 @@ export const ImageDrop: FC<Partial<DropzoneProps>> = (
             画像をここにドラッグするか、クリックでファイルを選択します。
           </Text>
           <Text size='sm' color='dimmed' inline mt={7}>
-            Attach as many files as you like, each file should not exceed 5mb
+            1つのファイルが5MBを超えない範囲でファイルを添付してください。
           </Text>
         </div>
       </Group>

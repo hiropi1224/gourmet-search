@@ -105,7 +105,7 @@ export const CustomHeader: FC = () => {
   };
 
   return (
-    <Box pb={120}>
+    <Box pb={20}>
       <Header height={60} px='md'>
         <Group position='apart' sx={{ height: '100%' }}>
           <Group

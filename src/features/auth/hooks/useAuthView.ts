@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useForm } from '@mantine/form';
-import { FormType, MantineFormType } from '@/features/auth/types';
+import { useForm, UseFormReturnType } from '@mantine/form';
+import { FormType } from '@/features/auth/types';
 import { useMutateAuth } from '@/hooks/useMutateAuth';
 import { UseStateFuncType } from '@/types';
 
 export const useAuthView = (): {
-  form: MantineFormType;
+  form: UseFormReturnType<FormType>;
   isRegister: boolean;
   setIsRegister: UseStateFuncType<boolean>;
   handleSubmit: (values: FormType) => Promise<void>;
@@ -27,7 +27,7 @@ export const useAuthView = (): {
     validateInputOnChange: true,
   });
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: FormType) => {
     if (isRegister) {
       registerMutation.mutate(values);
     } else {
