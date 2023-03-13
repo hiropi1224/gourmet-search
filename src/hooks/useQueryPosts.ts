@@ -1,8 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { Post } from '../types/';
 import { supabase } from '../utils/supabase';
 
-export const useQueryPosts: () => UseQueryResult<Post[], Error> = () => {
+export const useQueryPosts: () => UseQueryResult = () => {
   const getPosts = async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -16,7 +15,7 @@ export const useQueryPosts: () => UseQueryResult<Post[], Error> = () => {
     return data;
   };
 
-  return useQuery<Post[], Error>({
+  return useQuery({
     queryKey: ['posts'],
     queryFn: getPosts,
     staleTime: Infinity,
