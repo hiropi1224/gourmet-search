@@ -21,6 +21,8 @@ export const usePostFormView = (): {
   // zustand store
   const editedPost = useStore((state) => state.editedPost);
   const session = useStore((state) => state.session);
+  const position = useStore((state) => state.position);
+  const initializePosition = useStore((state) => state.initializePosition);
 
   // supabase
   const { createPostMutation, updatePostMutation } = useMutatePost();
@@ -50,11 +52,13 @@ export const usePostFormView = (): {
         title: values.title,
         post_url: editedPost.post_url,
         business_day: values.businessDay,
-        latlng: editedPost.latlng
-          ? { lat: editedPost.latlng.lat, lng: editedPost.latlng.lng }
-          : null,
+        latlng:
+          position.lat && position.lng
+            ? { lat: position.lat.toString(), lng: position.lng.toString() }
+            : null,
       });
       setFullUrl('');
+      initializePosition();
     } else {
       await updatePostMutation.mutateAsync({
         id: editedPost.id,

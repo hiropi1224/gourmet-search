@@ -31,16 +31,11 @@ export const usePostContentView = (
   };
 
   // 営業日表示用のJSX.Element生成
-  const BusinessDay =
-    businessDay.length !== 0 ? (
-      businessDay.map((day) => (
-        <Badge color={'gray'} key={day}>
-          {day}
-        </Badge>
-      ))
-    ) : (
-      <></>
-    );
+  const BusinessDay = businessDay.map((day) => (
+    <Badge color={'gray'} key={day}>
+      {day !== '' ? day : '未入力'}
+    </Badge>
+  ));
 
   return { BusinessDay, image, onClickCard };
 };
