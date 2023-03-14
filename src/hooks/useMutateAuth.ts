@@ -1,5 +1,5 @@
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import { supabase } from '../utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 export const useMutateAuth = (): {
   loginMutation: UseMutationResult<

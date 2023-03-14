@@ -1,10 +1,10 @@
 import router from 'next/router';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
+import useStore from '@/store';
+import { Post, EditedPost } from '@/types';
 import { notification } from '@/utils/notification';
-import useStore from '../store';
-import { Post, EditedPost } from '../types';
-import { supabase } from '../utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 export const useMutatePost: () => {
   deletePostMutation: UseMutationResult<undefined[], any, string, unknown>;

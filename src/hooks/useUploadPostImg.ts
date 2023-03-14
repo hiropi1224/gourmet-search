@@ -1,7 +1,7 @@
 import { FileWithPath } from '@mantine/dropzone';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import useStore from '../store';
-import { supabase } from '../utils/supabase';
+import useStore from '@/store';
+import { supabase } from '@/utils/supabase';
 
 export const useUploadPostImg: () => {
   useMutateUploadPostImg: UseMutationResult<void, any, FileWithPath[], unknown>;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { UseStateFuncType } from '@/types';
-import { supabase } from '../utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 export const useDownloadUrl: (
   filePath: string | undefined,
