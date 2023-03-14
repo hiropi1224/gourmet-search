@@ -10,7 +10,13 @@ type Props = {
 };
 
 export const PostList: FC<Props> = ({ posts, session = null }) => {
-  const { update, deletePostMutation, initializePosition } = usePostListView();
+  const {
+    update,
+    deletePostMutation,
+    initializePosition,
+    setFilterDay,
+    filterPost,
+  } = usePostListView(posts);
 
   useEffect(() => {
     initializePosition();
@@ -20,10 +26,11 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
 
   return (
     <PostListTemplate
-      posts={posts}
+      posts={filterPost}
       session={session}
       update={update}
       deletePostMutation={deletePostMutation}
+      onChange={setFilterDay}
     />
   );
 };
