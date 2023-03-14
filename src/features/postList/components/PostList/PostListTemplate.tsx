@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { SimpleGrid } from '@mantine/core';
+import { Box, MultiSelect, SimpleGrid } from '@mantine/core';
 import { Session } from '@supabase/supabase-js';
+import { businessDay } from '@/features/postForm/const';
 import { UseMutationResultType } from '@/features/postList/types';
-import { EditedPost, Post } from '@/types';
+import { EditedPost, Post, UseStateFuncType } from '@/types';
 import { EditAction } from '@/common/components/EditAction';
 import { PostContent } from '@/features/postList/components/PostContent';
 
@@ -11,6 +12,7 @@ type Props = {
   session: Session;
   update: (payload: EditedPost) => void;
   deletePostMutation: UseMutationResultType;
+  onChange: UseStateFuncType<string[]>;
 };
 
 export const PostListTemplate: FC<Props> = ({
@@ -18,9 +20,20 @@ export const PostListTemplate: FC<Props> = ({
   session,
   update,
   deletePostMutation,
+  onChange,
 }) => {
   return (
     <>
+      <Box my='md'>
+        <MultiSelect
+          mt='md'
+          size='md'
+          data={[...businessDay, { label: '未入力', value: '' }]}
+          label='営業日でフィルター'
+          placeholder='営業日'
+          onChange={(e) => onChange(e)}
+        />
+      </Box>
       <SimpleGrid
         breakpoints={[
           { minWidth: 'sm', cols: 2 },
