@@ -45,6 +45,11 @@ export const useMutateAuth = (): {
       onError: (err: any) => {
         alert(err.message);
       },
+      onSuccess: () => {
+        alert(
+          '登録が完了しました。入力されたメールアドレス宛に承認メールを送信しましたのでご確認ください。'
+        );
+      },
     }
   );
 
