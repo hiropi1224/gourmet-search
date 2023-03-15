@@ -4,7 +4,8 @@ import { useAuthView } from '@/features/auth/hooks/useAuthView';
 import { AuthTemplate } from '@/features/auth/components/Auth/AuthTemplate';
 
 export const Auth: FC = () => {
-  const { form, handleSubmit, isRegister, setIsRegister } = useAuthView();
+  const { form, handleSubmit, isRegister, setIsRegister, isLoading } =
+    useAuthView();
 
   return (
     <AuthTemplate
@@ -12,6 +13,7 @@ export const Auth: FC = () => {
       handleSubmit={handleSubmit}
       isRegister={isRegister}
       setIsRegister={setIsRegister}
+      isLoading={isLoading}
     />
   );
 };

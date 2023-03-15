@@ -51,7 +51,6 @@ export const PostFormTemplate: FC<Props> = ({
           loading={useMutateUploadPostImg.isLoading}
           disabled={useMutateUploadPostImg.isLoading || !form.isValid()}
         >
-          Update
           {editedPost.id ? 'Update' : 'Create'}
         </Button>
       </form>

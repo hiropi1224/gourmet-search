@@ -18,6 +18,7 @@ type Props = {
   handleSubmit: (values: FormType) => Promise<void>;
   setIsRegister: UseStateFuncType<boolean>;
   isRegister: boolean;
+  isLoading: boolean;
 };
 
 export const AuthTemplate: FC<Props> = ({
@@ -25,6 +26,7 @@ export const AuthTemplate: FC<Props> = ({
   handleSubmit,
   setIsRegister,
   isRegister,
+  isLoading,
 }) => {
   return (
     <Center style={{ flexDirection: 'column' }}>
@@ -64,6 +66,7 @@ export const AuthTemplate: FC<Props> = ({
             leftIcon={<IconDatabase size={14} />}
             color='cyan'
             type='submit'
+            loading={isLoading}
           >
             {isRegister ? '新規登録' : 'ログイン'}
           </Button>

@@ -9,10 +9,10 @@ export const useAuthView = (): {
   isRegister: boolean;
   setIsRegister: UseStateFuncType<boolean>;
   handleSubmit: (values: FormType) => Promise<void>;
+  isLoading: boolean;
 } => {
   const { loginMutation, registerMutation } = useMutateAuth();
   const [isRegister, setIsRegister] = useState(false);
-
   const form = useForm({
     initialValues: {
       email: '',
@@ -33,7 +33,10 @@ export const useAuthView = (): {
     } else {
       loginMutation.mutate(values);
     }
+    form.reset();
   };
 
-  return { form, isRegister, setIsRegister, handleSubmit };
+  const isLoading = registerMutation.isLoading;
+
+  return { form, isRegister, setIsRegister, handleSubmit, isLoading };
 };
