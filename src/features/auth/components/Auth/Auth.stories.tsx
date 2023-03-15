@@ -43,6 +43,7 @@ export const AuthForm: ComponentStory<typeof AuthTemplate> = () => {
       handleSubmit={handleSubmit}
       isRegister={isRegister}
       setIsRegister={setIsRegister}
+      isLoading={false}
     />
   );
 };
