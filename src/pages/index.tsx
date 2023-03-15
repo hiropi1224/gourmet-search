@@ -13,7 +13,7 @@ import {
 } from '@mantine/core';
 import { Results } from '@/types';
 import { Layout } from '@/common/components/Layout';
-import { SearchForm } from '@/components/SearchForm';
+import { SearchForm } from '@/features/search/components/SearchForm';
 
 const Home: CustomNextPage = () => {
   const [gourmet, setGourmet] = useState<Results>();
