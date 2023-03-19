@@ -1,5 +1,12 @@
 import { FC } from 'react';
-import { Alert, Button, Center, MultiSelect, SimpleGrid } from '@mantine/core';
+import {
+  Alert,
+  Button,
+  Center,
+  Checkbox,
+  SimpleGrid,
+  Group,
+} from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
 import { Session } from '@supabase/supabase-js';
 import { IconAlertCircle } from '@tabler/icons';
@@ -29,14 +36,15 @@ export const PostListTemplate: FC<Props> = ({
   return (
     <>
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
-        <MultiSelect
-          mt='md'
-          size='md'
-          data={[...businessDay, { label: '未入力', value: '' }]}
-          label='営業日でフィルター'
-          placeholder='営業日'
-          {...form.getInputProps('businessDay')}
-        />
+        <Checkbox.Group {...form.getInputProps('businessDay')}>
+          <Center>
+            <Group>
+              {[...businessDay, { label: '未入力', value: '' }].map((day) => (
+                <Checkbox key={day.value} value={day.value} label={day.label} />
+              ))}
+            </Group>
+          </Center>
+        </Checkbox.Group>
 
         <Center m='md'>
           <Button type='submit'>指定した営業日で絞り込む</Button>
