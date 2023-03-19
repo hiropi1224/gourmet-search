@@ -1,9 +1,11 @@
 import { FC } from 'react';
-import { Box, MultiSelect, SimpleGrid } from '@mantine/core';
+import { Alert, Button, Center, MultiSelect, SimpleGrid } from '@mantine/core';
+import { UseFormReturnType } from '@mantine/form';
 import { Session } from '@supabase/supabase-js';
+import { IconAlertCircle } from '@tabler/icons';
 import { businessDay } from '@/features/postForm/const';
-import { UseMutationResultType } from '@/features/postList/types';
-import { EditedPost, Post, UseStateFuncType } from '@/types';
+import { FormType, UseMutationResultType } from '@/features/postList/types';
+import { EditedPost, Post } from '@/types';
 import { EditAction } from '@/common/components/EditAction';
 import { PostContent } from '@/features/postList/components/PostContent';
 
@@ -12,7 +14,8 @@ type Props = {
   session: Session;
   update: (payload: EditedPost) => void;
   deletePostMutation: UseMutationResultType;
-  onChange: UseStateFuncType<string[]>;
+  form: UseFormReturnType<FormType>;
+  handleSubmit: (values: FormType) => void;
 };
 
 export const PostListTemplate: FC<Props> = ({
@@ -20,20 +23,34 @@ export const PostListTemplate: FC<Props> = ({
   session,
   update,
   deletePostMutation,
-  onChange,
+  form,
+  handleSubmit,
 }) => {
   return (
     <>
-      <Box my='md'>
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <MultiSelect
           mt='md'
           size='md'
           data={[...businessDay, { label: '未入力', value: '' }]}
           label='営業日でフィルター'
           placeholder='営業日'
-          onChange={(e) => onChange(e)}
+          {...form.getInputProps('businessDay')}
         />
-      </Box>
+
+        <Center m='md'>
+          <Button type='submit'>指定した営業日で絞り込む</Button>
+        </Center>
+      </form>
+      {posts.length === 0 && (
+        <Alert
+          icon={<IconAlertCircle size='1rem' />}
+          title='投稿がありません'
+          color='red'
+        >
+          <></>
+        </Alert>
+      )}
       <SimpleGrid
         breakpoints={[
           { minWidth: 'sm', cols: 2 },

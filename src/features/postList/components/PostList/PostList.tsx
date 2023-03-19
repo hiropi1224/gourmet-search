@@ -14,8 +14,9 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
     update,
     deletePostMutation,
     initializePosition,
-    setFilterDay,
     filterPost,
+    form,
+    handleSubmit,
   } = usePostListView(posts);
 
   useEffect(() => {
@@ -30,7 +31,8 @@ export const PostList: FC<Props> = ({ posts, session = null }) => {
       session={session}
       update={update}
       deletePostMutation={deletePostMutation}
-      onChange={setFilterDay}
+      form={form}
+      handleSubmit={handleSubmit}
     />
   );
 };

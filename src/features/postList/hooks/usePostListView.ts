@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { UseMutationResultType } from '@/features/postList/types';
+import { useForm, UseFormReturnType } from '@mantine/form';
+import { FormType, UseMutationResultType } from '@/features/postList/types';
 import { useMutatePost } from '@/hooks/useMutatePost';
 import useStore from '@/store';
-import { EditedPost, Post, UseStateFuncType } from '@/types';
+import { EditedPost, Post } from '@/types';
 
 export const usePostListView = (
   posts: Post[]
@@ -10,31 +11,40 @@ export const usePostListView = (
   update: (payload: EditedPost) => void;
   deletePostMutation: UseMutationResultType;
   initializePosition: VoidFunction;
-  setFilterDay: UseStateFuncType<string[]>;
   filterPost: Post[];
+  form: UseFormReturnType<FormType>;
+  handleSubmit: (values: FormType) => void;
 } => {
   const update = useStore((state) => state.updateEditedPost);
   const { deletePostMutation } = useMutatePost();
   const initializePosition = useStore((state) => state.initializePosition);
-  const [filterDay, setFilterDay] = useState<string[]>([
-    '月',
-    '火',
-    '水',
-    '木',
-    '金',
-    '',
-  ]);
+  const [filterPost, setFilterPost] = useState<Post[]>(posts);
 
-  const filterPosts = (obj: Post[]) => {
-    return obj.filter((item) => filterDay.includes(item.business_day[0]));
+  /**
+   * mantine form
+   */
+  const form = useForm({
+    initialValues: {
+      businessDay: [] as string[],
+    },
+  });
+
+  /**
+   * フォームsubmitで受け取ったvaluesをもとにpostsをフィルタリングしてfilterPostにセットする
+   * @param values
+   */
+  const handleSubmit = (values: FormType) => {
+    setFilterPost(
+      posts.filter((item) => values.businessDay.includes(item.business_day[0]))
+    );
   };
-  const filterPost = filterPosts(posts);
 
   return {
     update,
     deletePostMutation,
     initializePosition,
-    setFilterDay,
     filterPost,
+    form,
+    handleSubmit,
   };
 };
