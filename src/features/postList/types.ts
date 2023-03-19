@@ -11,3 +11,7 @@ export type UseMutationResultType = UseMutationResult<
   string,
   unknown
 >;
+
+export type FormType = {
+  businessDay: string[];
+};
