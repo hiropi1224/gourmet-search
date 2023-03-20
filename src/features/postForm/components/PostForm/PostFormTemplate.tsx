@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, MultiSelect, TextInput } from '@mantine/core';
+import { Button, Checkbox, Group, Text, TextInput } from '@mantine/core';
 import { FileWithPath } from '@mantine/dropzone';
 import { UseFormReturnType } from '@mantine/form';
 import { IconDatabase } from '@tabler/icons';
@@ -33,14 +33,18 @@ export const PostFormTemplate: FC<Props> = ({
           size='md'
           {...form.getInputProps('title')}
         />
-        <MultiSelect
+        <Checkbox.Group
           mt='md'
           size='md'
-          data={businessDay}
-          label='営業日'
-          placeholder='営業日'
           {...form.getInputProps('businessDay')}
-        />
+        >
+          <Group>
+            <Text>営業日</Text>
+            {businessDay.map((day) => (
+              <Checkbox key={day.value} value={day.value} label={day.label} />
+            ))}
+          </Group>
+        </Checkbox.Group>
         {children}
         <Button
           m='auto'
