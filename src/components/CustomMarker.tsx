@@ -27,7 +27,9 @@ const CustomMarker: FC = () => {
   ) : (
     <Marker position={position} draggable>
       <Popup>
-        <Text>{restaurantInfo.title}</Text>
+        <Text size='xl' fw='bold'>
+          {restaurantInfo.title}
+        </Text>
         <Text>{`lat:${position.lat}`}</Text>
         <Text>{`lng:${position.lng}`}</Text>
       </Popup>

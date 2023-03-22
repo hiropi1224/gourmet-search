@@ -19,6 +19,7 @@ export const PostContent: FC<Props> = ({
   children = <></>,
 }) => {
   const { image, BusinessDay, onClickCard } = usePostContentView(
+    title,
     postUrl,
     businessDay,
     position

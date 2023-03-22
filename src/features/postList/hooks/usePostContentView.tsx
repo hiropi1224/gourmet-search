@@ -11,6 +11,7 @@ import useStore from '@/store';
  * @returns { BusinessDay, image, onClickCard }
  */
 export const usePostContentView = (
+  title: string,
   postUrl: string,
   businessDay: string[],
   position: LatLng | null
@@ -21,6 +22,7 @@ export const usePostContentView = (
 } => {
   const { fullUrl: image } = useDownloadUrl(postUrl, 'posts');
   const setPosition = useStore((state) => state.setPosition);
+  const setRestaurantInfo = useStore((state) => state.setRestaurantInfo);
 
   /**
    * カード押下時に経緯度をストアに保存する
@@ -28,6 +30,7 @@ export const usePostContentView = (
   const onClickCard = () => {
     if (position === null) return;
     setPosition({ lat: Number(position.lat), lng: Number(position.lng) });
+    setRestaurantInfo({ title: title });
   };
 
   // 営業日表示用のJSX.Element生成
