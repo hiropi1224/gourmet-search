@@ -5,9 +5,9 @@ import useStore from '@/store';
 import { supabase } from '@/utils/supabase';
 import { Layout } from '@/common/components/Layout';
 import { Auth } from '@/features/auth/components/Auth';
-import { PostForm } from '@/features/postForm/components/PostForm';
+import { PostForm as PostFormComponent } from '@/features/postForm/components/PostForm';
 
-const Search: CustomNextPage = () => {
+const PostForm: CustomNextPage = () => {
   const session = useStore((state) => state.session);
   const setSession = useStore((state) => state.setSession);
 
@@ -18,7 +18,7 @@ const Search: CustomNextPage = () => {
     });
   }, [setSession]);
 
-  return <Layout>{!session ? <Auth /> : <PostForm />}</Layout>;
+  return <Layout>{!session ? <Auth /> : <PostFormComponent />}</Layout>;
 };
 
-export default Search;
+export default PostForm;
