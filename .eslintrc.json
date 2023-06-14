@@ -1,8 +1,4 @@
 {
-  "env": {
-    "browser": true,
-    "es2022": true
-  },
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
@@ -32,29 +28,19 @@
         "next": "return"
       }
     ],
+    "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": ["error"],
-    "@typescript-eslint/no-misused-promises":  [
+    "@typescript-eslint/no-misused-promises": [
       "error",
       {
         "checksVoidReturn": false
       }
     ],
-    "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
+    "@typescript-eslint/no-unused-vars": [
       "error",
       {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "@typescript-eslint/strict-boolean-expressions": [
-      "error",
-      {
-        "allowNullableObject": true
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
       }
     ],
     "import/extensions": [
@@ -65,7 +51,8 @@
           "js": "never",
           "jsx": "never",
           "ts": "never",
-          "tsx": "never"
+          "tsx": "never",
+          "json": "always"
         }
       }
     ],
@@ -73,56 +60,52 @@
       "error",
       {
         "groups": [
-          "builtin", // 組み込みモジュール
-          "external", // npmでインストールした外部ライブラリ
-          "internal", // 自作モジュール
+          "builtin",
+          "external",
+          "internal",
           "parent",
           "sibling",
           "object",
           "index"
         ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "alphabetize": {
-          "order": "asc", // 昇順にソート
-          "caseInsensitive": true // 小文字大文字を区別する
-        },
         "pathGroups": [
-          // 指定した順番にソートされる
           {
-            "pattern": "{react,next,next/*}",
+            "pattern": "{next/**}",
             "group": "builtin",
             "position": "before"
           },
           {
-            "pattern": "{[A-Z]*,**/[A-Z]*}",
+            "pattern": "{react}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@/**",
             "group": "internal",
             "position": "after"
           }
-        ]
+        ],
+        "newlines-between": "always",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc"
+        }
       }
     ],
+    "unused-imports/no-unused-imports": "error",
     "react/display-name": "off",
     "no-console": [
-      "error",
+      2,
       {
         "allow": ["warn", "error"]
       }
-    ],
-    "eqeqeq": "error",
-    "prefer-template": "error"
+    ]
   },
   "overrides": [
     {
       "files": ["*.tsx"],
       "rules": {
         "react/prop-types": "off"
-      }
-    },
-    {
-      "files": ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
-      "rules": {
-        "storybook/hierarchy-separator": "error",
-        "storybook/default-exports": "off"
       }
     }
   ],

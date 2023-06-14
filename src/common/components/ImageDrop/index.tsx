@@ -1,1 +1,0 @@
-export { ImageDrop } from './ImageDrop';
